@@ -1,10 +1,5 @@
 <template>
-  <a-menu
-    v-model="selectedKeys"
-    :theme="them"
-    :mode="mode"
-    @click="onItemClick"
-  >
+  <a-menu v-model="selectedKeys" :theme="them" :mode="mode" @click="onItemClick">
     <template v-for="menu in menus">
       <a-menu-item :key="menu.name">
         <a-icon :type="menu.type" style="font-size: inherit" />

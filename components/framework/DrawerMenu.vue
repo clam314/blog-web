@@ -1,11 +1,5 @@
 <template>
-  <a-drawer
-    width="200"
-    :placement="placement"
-    :closable="false"
-    :visible="visible"
-    @close="onClose"
-  >
+  <a-drawer width="200" :placement="placement" :closable="false" :visible="visible" @close="onClose">
     <div class="logo" />
     <app-menu
       :menus="menus"

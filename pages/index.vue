@@ -1,26 +1,13 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">blog-web</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="container-1">
+      <div class="container-1-wrapper">内容1</div>
+    </div>
+    <div class="container-2">
+      <div class="container-2-wrapper">内容2</div>
+    </div>
+    <div class="container-1">
+      <div class="container-2-wrapper">内容2</div>
     </div>
   </div>
 </template>
@@ -29,35 +16,37 @@
 export default {}
 </script>
 
-<style>
+<style lang="less" scoped>
+@import '~assets/style/default.less';
+
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+  height: 100%;
+  width: 100%;
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
+  &-1 {
+    width: 100%;
+    height: calc(1080px - @app-header-height);
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+    position: relative;
+    background-image: url(https://acg.toubiec.cn/random.php);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    &::before {
+      content: '';
+      backdrop-filter: blur(7px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
 
-.links {
-  padding-top: 15px;
+  &-2 {
+    width: 100%;
+    height: 500px;
+  }
 }
 </style>

@@ -3,11 +3,11 @@
     v-model="selectedKeys"
     :theme="them"
     :mode="mode"
-    @change="onItemClick"
+    @click="onItemClick"
   >
     <template v-for="menu in menus">
       <a-menu-item :key="menu.name">
-        <a-icon :type="menu.type" />
+        <a-icon :type="menu.type" style="font-size: inherit" />
         <span class="nav-text">{{ menu.name }}</span>
       </a-menu-item>
     </template>
@@ -22,6 +22,10 @@ export default {
       type: Array,
       required: true,
     },
+    selected: {
+      type: Array,
+      required: true,
+    },
     them: {
       type: String,
       default: 'light', // light or dark
@@ -33,15 +37,17 @@ export default {
   },
   data() {
     return {
-      selectedKeys: [],
+      selectedKeys: this.selected,
     }
   },
-  created() {
-    this.selectedKeys = [this.menus[0].name]
+  watch: {
+    selected(val) {
+      this.selectedKeys = val
+    },
   },
   methods: {
-    onItemClick(item, key, keyPath) {
-      this.$emit('onItemClick', item, key, keyPath)
+    onItemClick(item) {
+      this.$emit('onItemClick', item)
     },
   },
 }

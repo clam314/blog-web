@@ -1,7 +1,7 @@
 <template>
   <a-drawer
     width="200"
-    placement="left"
+    :placement="placement"
     :closable="false"
     :visible="visible"
     @close="onClose"
@@ -9,9 +9,11 @@
     <div class="logo" />
     <app-menu
       :menus="menus"
+      :selected="selected"
       mode="inline"
       them="dark"
       style="width: 100%; height: 100%"
+      @onItemClick="onItemClick"
     />
   </a-drawer>
 </template>
@@ -27,9 +29,17 @@ export default {
       type: Array,
       required: true,
     },
+    selected: {
+      type: Array,
+      required: true,
+    },
     visible: {
       type: Boolean,
       default: false,
+    },
+    placement: {
+      type: String,
+      default: 'right',
     },
   },
   data() {
@@ -38,6 +48,9 @@ export default {
   methods: {
     onClose() {
       this.$emit('close', this.visible)
+    },
+    onItemClick(item) {
+      this.$emit('onItemClick', item)
     },
   },
 }

@@ -1,7 +1,8 @@
 <template>
   <div>
-    <AppLayout />
-    <!--    <Nuxt />-->
+    <AppLayout>
+      <Nuxt />
+    </AppLayout>
   </div>
 </template>
 

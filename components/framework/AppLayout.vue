@@ -4,12 +4,16 @@
       :menus="menus"
       :selected="selectedKeys"
       :visible="drawerVisible"
+      :container="container"
       @close="onDrawerClose"
       @onItemClick="onMenuItemClick"
     />
     <a-layout-header class="app-header">
       <div class="app-header-wrapper">
-        <img class="logo" src="~assets/image/logo1.svg" />
+        <div class="logo-wrapper">
+          <img class="logo" src="~assets/image/logo1.svg" />
+          <span class="logo-title">Web前端实验室</span>
+        </div>
         <app-menu
           v-if="menusVisible"
           class="app-menu"
@@ -19,7 +23,7 @@
           @onItemClick="onMenuItemClick"
         />
         <div v-if="!menusVisible" class="app-header-wrapper-right">
-          <a-icon type="menu-unfold" style="font-size: 20px" @click="openDrawer" />
+          <a-icon type="menu-unfold" style="font-size: 20px; color: white" @click="openDrawer" />
         </div>
       </div>
     </a-layout-header>
@@ -73,9 +77,11 @@ export default {
         { name: '管理系统后台', href: 'https://github.com/clam314/blog-admin-api' },
       ],
       links: [{ name: 'github', href: 'https://github.com/clam314' }],
+      container: null,
     }
   },
   mounted() {
+    this.container = document.querySelector('.app-content')
     const result = window.matchMedia('(max-width: 768px)').matches
     this.drawerVisible = result
     this.menusVisible = !result
@@ -107,7 +113,6 @@ export default {
 @import '~assets/style/variables.less';
 @import 'assets/style/default.less';
 
-@nav-background-color: rgba(0, 0, 0, 0.8);
 .app-header {
   position: fixed;
   width: 100%;
@@ -120,6 +125,7 @@ export default {
   padding: 0 0;
   backdrop-filter: saturate(180%) blur(20px);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  line-height: @app-header-height;
 
   &-wrapper {
     padding: 0 10px;
@@ -128,9 +134,14 @@ export default {
     justify-content: space-between;
 
     .logo {
-      padding: 5px;
+      padding: 5px 0;
       height: @app-header-height;
       width: @app-header-height;
+    }
+
+    .logo-title {
+      font-size: 20px;
+      color: white;
     }
 
     .app-menu {
@@ -141,7 +152,6 @@ export default {
     }
 
     &-right {
-      height: @app-header-height;
       line-height: @app-header-height;
       display: flex;
       justify-content: center;
@@ -176,14 +186,6 @@ export default {
     /deep/ .ant-descriptions-item-label {
       font-weight: 600;
       font-size: @footer-table-font-size;
-    }
-  }
-
-  &-icon {
-    font-size: 20px;
-    cursor: pointer;
-    &:hover {
-      color: @primary-color;
     }
   }
 

@@ -2,6 +2,7 @@
   <a-drawer width="200" :placement="placement" :closable="false" :visible="visible" @close="onClose">
     <div class="logo" />
     <app-menu
+      class="app-menu"
       :menus="menus"
       :selected="selected"
       mode="inline"
@@ -33,7 +34,7 @@ export default {
     },
     placement: {
       type: String,
-      default: 'right',
+      default: 'top',
     },
   },
   data() {
@@ -51,8 +52,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/default.less';
+
 /deep/ .ant-drawer-body {
   padding: 0;
   height: 100%;
+}
+
+.app-menu {
+  padding-top: 50px;
+  background: @nav-background-color;
 }
 </style>

@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import 'assets/style/default.less';
+@import '~assets/style/config.less';
 .app-footer-wrapper {
   margin: 0 auto;
   max-width: @app-max-width;

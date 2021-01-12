@@ -10,9 +10,16 @@ const state = () => ({
     },
   ],
   token: '',
-  userInfo: null,
-  avatar: '',
-  nickName: '',
+  userInfo: {
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+    email: 'clam666@163.com',
+    introduction: 'Stay hungry, Stay foolish',
+    tags: ['acg', '前端'],
+    name: '壹原侑子',
+  },
+  avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+  nickName: '壹原侑子',
+  tags: ['acg', '前端'],
 })
 
 export default state

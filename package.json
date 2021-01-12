@@ -23,6 +23,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "ant-design-vue": "^1.6.5",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "nuxt": "^2.14.6"
   },
   "devDependencies": {

@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '~assets/style/default.less';
+@import '~assets/style/config.less';
 
 .container {
   display: inline-block;

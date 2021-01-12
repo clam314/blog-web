@@ -11,10 +11,10 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['~assets/style/reset.css', '~assets/style/variables.less'],
+  css: ['~assets/style/reset', '~assets/style/variables'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', { src: '~plugins/filter/index.js', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

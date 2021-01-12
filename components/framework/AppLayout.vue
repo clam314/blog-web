@@ -95,7 +95,7 @@ export default {
 
 <style lang="less" scoped>
 @import '~assets/style/variables.less';
-@import 'assets/style/default.less';
+@import '~assets/style/config.less';
 
 .app-header {
   position: fixed;
@@ -155,6 +155,7 @@ export default {
 .app-content {
   margin: @app-header-height 0 0 0;
   display: flex;
+  //flex-direction: column;
 }
 
 .app-footer {

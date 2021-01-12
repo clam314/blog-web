@@ -11,7 +11,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['~assets/style/variables.less'],
+  css: ['~assets/style/reset.css', '~assets/style/variables.less'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['@/plugins/antd-ui'],

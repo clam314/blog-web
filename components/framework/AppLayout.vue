@@ -108,7 +108,6 @@ export default {
   justify-content: center;
   padding: 0 0;
   backdrop-filter: saturate(180%) blur(20px);
-  //box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   line-height: @app-header-height;
 
   &-wrapper {
@@ -116,15 +115,24 @@ export default {
     width: @app-max-width;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
+
+    .logo-wrapper {
+      height: @app-header-height;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .logo {
-      padding: 5px 0;
-      height: @app-header-height;
-      width: @app-header-height;
+      padding: 3px 0;
+      height: @app-header-height - 4px;
+      width: auto;
     }
 
     .logo-title {
-      font-size: 20px;
+      margin-left: 10px;
+      font-size: 18px;
       color: @nav-text-color;
     }
 

@@ -1,5 +1,13 @@
 <template>
-  <a-drawer width="200" :placement="placement" :closable="false" :visible="visible" @close="onClose">
+  <a-drawer
+    width="200"
+    :placement="placement"
+    :closable="false"
+    :visible="visible"
+    :getContainer="false"
+    :wrap-style="{ position: 'absolute' }"
+    @close="onClose"
+  >
     <div class="logo" />
     <app-menu
       class="app-menu"
@@ -54,6 +62,14 @@ export default {
 <style lang="less" scoped>
 @import '~assets/style/default.less';
 
+/deep/ .ant-drawer-content {
+  background-color: transparent;
+}
+
+/deep/ .ant-drawer-content-wrapper {
+  height: 100% !important;
+}
+
 /deep/ .ant-drawer-body {
   padding: 0;
   height: 100%;
@@ -61,6 +77,6 @@ export default {
 
 .app-menu {
   padding-top: 50px;
-  background: @nav-background-color;
+  background: transparent;
 }
 </style>

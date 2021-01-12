@@ -41,6 +41,10 @@ export default {}
       right: 0;
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.7);
+      // 修复Chrome闪烁问题
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      -webkit-perspective: 1000px;
     }
   }
 

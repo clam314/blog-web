@@ -4,7 +4,6 @@
       :menus="menus"
       :selected="selectedKeys"
       :visible="drawerVisible"
-      :container="container"
       @close="onDrawerClose"
       @onItemClick="onMenuItemClick"
     />
@@ -23,7 +22,7 @@
           @onItemClick="onMenuItemClick"
         />
         <div v-if="!menusVisible" class="app-header-wrapper-right">
-          <a-icon type="menu-unfold" style="font-size: 20px; color: white" @click="openDrawer" />
+          <menu-icon-omit style="font-size: 20px; color: white" @change="openDrawer" />
         </div>
       </div>
     </a-layout-header>
@@ -57,11 +56,12 @@
   </a-layout>
 </template>
 <script>
+import MenuIconOmit from '@/components/basic/MenuIconOmit'
 import DrawerMenu from '~/components/framework/DrawerMenu'
 import AppMenu from '~/components/framework/AppMenu'
 
 export default {
-  components: { AppMenu, DrawerMenu },
+  components: { AppMenu, DrawerMenu, MenuIconOmit },
   data() {
     return {
       drawerVisible: false,
@@ -77,11 +77,9 @@ export default {
         { name: '管理系统后台', href: 'https://github.com/clam314/blog-admin-api' },
       ],
       links: [{ name: 'github', href: 'https://github.com/clam314' }],
-      container: null,
     }
   },
   mounted() {
-    this.container = document.querySelector('.app-content')
     const result = window.matchMedia('(max-width: 768px)').matches
     this.drawerVisible = result
     this.menusVisible = !result
@@ -96,8 +94,8 @@ export default {
     onDrawerClose(visible) {
       this.drawerVisible = false
     },
-    openDrawer() {
-      this.drawerVisible = true
+    openDrawer(status) {
+      this.drawerVisible = status
     },
     go2Github() {
       window.open('https://github.com/clam314')
@@ -116,7 +114,7 @@ export default {
 .app-header {
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 1000;
   background-color: @nav-background-color;
   height: @app-header-height;
   display: flex;
@@ -141,7 +139,7 @@ export default {
 
     .logo-title {
       font-size: 20px;
-      color: white;
+      color: @nav-text-color;
     }
 
     .app-menu {

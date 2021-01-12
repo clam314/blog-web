@@ -40,29 +40,35 @@ import AppFooter from '@/components/framework/AppFooter'
 import DrawerMenu from '~/components/framework/DrawerMenu'
 import AppMenu from '~/components/framework/AppMenu'
 
+function matchMedia(callback, width = '738px') {
+  return () => {
+    const result = window.matchMedia(`(max-width: ${width})`).matches
+    callback(result)
+  }
+}
+
 export default {
   components: { AppFooter, AppMenu, DrawerMenu, MenuIconOmit },
   data() {
     return {
       drawerVisible: false,
       menusVisible: true,
-      selectedKeys: ['站点主页'],
+      selectedKeys: [],
       menus: [
-        { name: '站点主页', type: 'smile' },
-        { name: '个人文章', type: 'read' },
+        { name: '站点主页', type: 'smile', path: '/' },
+        { name: '个人文章', type: 'read', path: '/article' },
       ],
     }
   },
   mounted() {
-    const result = window.matchMedia('(max-width: 768px)').matches
-    this.drawerVisible = result
-    this.menusVisible = !result
-    const that = this
-    window.onresize = () => {
-      const result = window.matchMedia('(max-width: 768px)').matches
-      that.drawerVisible = result
-      that.menusVisible = !result
-    }
+    const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
+    this.selectedKeys = [name || this.menus[0].name]
+    const match = matchMedia((result) => {
+      this.drawerVisible = result
+      this.menusVisible = !result
+    })
+    match()
+    window.onresize = match
   },
   methods: {
     onDrawerClose(visible) {
@@ -71,11 +77,17 @@ export default {
     openDrawer(status) {
       this.drawerVisible = status
     },
-    go2Github() {
-      window.open('https://github.com/clam314')
-    },
     onMenuItemClick(item) {
       this.selectedKeys = [item.key]
+      const path = this.findMenuOrRouter(item.key, 'name', 'path')
+      this.$router.push(path || '/')
+    },
+    findMenuOrRouter(val, key, findKey) {
+      for (const m of this.menus) {
+        if (val === m[key]) {
+          return m[findKey]
+        }
+      }
     },
   },
 }
@@ -96,7 +108,7 @@ export default {
   justify-content: center;
   padding: 0 0;
   backdrop-filter: saturate(180%) blur(20px);
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  //box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   line-height: @app-header-height;
 
   &-wrapper {

@@ -27,9 +27,7 @@
       </div>
     </a-layout-header>
     <a-layout-content class="app-content">
-      <div class="app-content-wrapper">
-        <slot></slot>
-      </div>
+      <slot></slot>
     </a-layout-content>
     <a-layout-footer class="app-footer">
       <div class="app-footer-wrapper">
@@ -160,6 +158,7 @@ export default {
 
 .app-content {
   margin: @app-header-height 0 0 0;
+  display: flex;
 }
 
 .app-footer {

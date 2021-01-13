@@ -48,4 +48,8 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+/deep/ .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+</style>

@@ -1,12 +1,5 @@
 <template>
   <a-layout style="min-height: 100vh">
-    <drawer-menu
-      :menus="menus"
-      :selected="selectedKeys"
-      :visible="drawerVisible"
-      @close="onDrawerClose"
-      @onItemClick="onMenuItemClick"
-    />
     <a-layout-header class="app-header">
       <div class="app-header-wrapper">
         <div class="logo-wrapper">
@@ -26,6 +19,17 @@
         </div>
       </div>
     </a-layout-header>
+    <div class="menus2-wrapper" :class="{ 'menus2-open': drawerVisible }">
+      <app-menu
+        class="app-menu"
+        :class="{ 'menu-show': drawerVisible }"
+        :menus="menus"
+        them="dark"
+        :selected="selectedKeys"
+        :mode="'inline'"
+        @onItemClick="onMenuItemClick"
+      />
+    </div>
     <a-layout-content class="app-content">
       <slot></slot>
     </a-layout-content>
@@ -166,6 +170,35 @@ export default {
       align-items: center;
     }
   }
+}
+
+.menus2-wrapper {
+  top: @app-header-height;
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  background-color: @nav-background-color;
+  height: 0;
+  transition: height 0.8s @ease-in-back;
+
+  .app-menu {
+    width: 0;
+    background: transparent;
+    font-size: 16px;
+    opacity: 0;
+    transition: 0.8s @ease-in-out-quint;
+  }
+
+  .menu-show {
+    font-size: 16px;
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.menus2-open {
+  height: 30%;
+  transition: height 0.4s @ease-out-back;
 }
 
 .app-content {

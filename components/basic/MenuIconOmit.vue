@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="onClick">
+  <div class="container" :class="{ change: close }" @click="onClick">
     <div class="bar1"></div>
     <div class="bar2"></div>
     <div class="bar3"></div>
@@ -8,16 +8,16 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isClose: false,
-    }
+  model: {
+    prop: 'close',
+    event: 'change',
+  },
+  props: {
+    close: Boolean,
   },
   methods: {
-    onClick(event) {
-      event.currentTarget.classList.toggle('change')
-      this.isClose = !this.isClose
-      this.$emit('change', this.isClose)
+    onClick() {
+      this.$emit('change', !this.close)
     },
   },
 }

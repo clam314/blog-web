@@ -15,7 +15,7 @@
           @onItemClick="onMenuItemClick"
         />
         <div v-if="!menusVisible" class="app-header-wrapper-right">
-          <menu-icon-omit style="font-size: 20px; color: white" @change="openDrawer" />
+          <menu-icon-omit v-model="drawerVisible" style="font-size: 20px; color: white" />
         </div>
       </div>
     </a-layout-header>
@@ -83,19 +83,12 @@ export default {
       this.selectedKeys = [name]
     }
     const match = matchMedia((result) => {
-      this.drawerVisible = result
       this.menusVisible = !result
     })
     match()
     window.onresize = match
   },
   methods: {
-    onDrawerClose(visible) {
-      this.drawerVisible = false
-    },
-    openDrawer(status) {
-      this.drawerVisible = status
-    },
     onMenuItemClick(item) {
       this.selectedKeys = [item.key]
       const path = this.findMenuOrRouter(item.key, 'name', 'path')

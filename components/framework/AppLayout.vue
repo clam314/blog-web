@@ -57,7 +57,6 @@ import AppMenu from '~/components/framework/AppMenu'
 // ]
 
 function matchMedia(callback, width = 576) {
-  console.log(width)
   return () => {
     const result = window.matchMedia(`(max-width: ${width}px)`).matches
     callback(result)
@@ -195,12 +194,14 @@ export default {
 }
 
 .app-content {
+  background-color: @app-content-background-color;
   margin: @app-header-height 0 0 0;
   display: flex;
   //flex-direction: column;
 }
 
 .app-footer {
+  background-color: @app-footer-background-color;
   width: 100%;
 }
 </style>

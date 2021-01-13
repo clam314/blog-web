@@ -3,18 +3,13 @@
     <div class="main-content-wrapper">
       <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
         <a-col :sm="24" :lg="6">
-          <a-card :bordered="false">
+          <a-card :bordered="false" class="card-background">
             <div class="user-info">
               <div class="avatar">
                 <img :src="avatar" />
               </div>
               <div class="username">{{ nickName }}</div>
               <div v-if="userInfo.introduction" class="bio">{{ userInfo.introduction }}</div>
-            </div>
-            <div class="user-details">
-              <p v-if="userInfo.email"><a-icon type="mail" />{{ userInfo.email }}</p>
-              <!--            <p v-if="userInfo.lastLoginIp"><a-icon type="global" />{{ userInfo.lastLoginIp }}</p>-->
-              <!--            <p v-if="userInfo.lastLoginTime"><a-icon type="history" />{{ Number(userInfo.lastLoginTime) | moment }}</p>-->
             </div>
             <a-divider />
 
@@ -27,23 +22,30 @@
                 <a-tag v-else :key="index" :closable="false">{{ tag }}</a-tag>
               </template>
             </div>
-            <a-divider :dashed="true" />
-            <div class="account-center-team">
-              <div class="teamTitle">团队</div>
-              <div class="members">
-                <a-row>
-                  <a-col v-for="(item, index) in teams" :key="index" :span="12">
-                    <a>
-                      <span class="member">{{ item }}</span>
-                    </a>
-                  </a-col>
-                </a-row>
-              </div>
+          </a-card>
+          <a-card class="card-background card-category" :bordered="false">
+            <div class="article-category">
+              <a-divider class="category-title">文章类别</a-divider>
+              <a-menu
+                v-model="selectedCategory"
+                class="categories"
+                theme="light"
+                mode="inline"
+                :defaultSelectedKeys="['全部']"
+                @click="onMenuClick"
+              >
+                <template v-for="(item, index) in categories">
+                  <a-menu-item :key="index" class="category-wrapper">
+                    <span class="category">{{ item }}</span>
+                  </a-menu-item>
+                </template>
+              </a-menu>
             </div>
           </a-card>
         </a-col>
         <a-col :sm="24" :lg="18">
           <a-card
+            class="card-background"
             :bordered="false"
             :tabList="tabListNoTitle"
             :activeTabKey="noTitleKey"
@@ -67,7 +69,8 @@ export default {
   },
   data() {
     return {
-      teams: ['很有想法的', '专注设计', '辣~', '大长腿', '川妹子', '海纳百川'],
+      selectedCategory: ['全部'],
+      categories: ['全部', 'Android', 'CSS', 'HTML', 'Docker', '前端', '随笔'],
       noTitleKey: 'article',
       tabListNoTitle: [
         {
@@ -83,6 +86,9 @@ export default {
   methods: {
     handleTabChange(key, type) {
       this[type] = key
+    },
+    onMenuClick(item) {
+      this.selectedCategory = [item.key]
     },
   },
 }
@@ -100,7 +106,7 @@ export default {
     max-width: @app-max-width;
     padding-left: @app-max-width-margin * 2;
     padding-right: @app-max-width-margin*2;
-    margin: 18px auto 0 auto;
+    margin: 18px auto 18px auto;
 
     .user-info {
       text-align: center;
@@ -141,16 +147,6 @@ export default {
         left: 0;
         top: 4px;
       }
-
-      .title {
-        background-position: 0 0;
-      }
-      .group {
-        background-position: 0 -22px;
-      }
-      .address {
-        background-position: 0 -44px;
-      }
     }
 
     .user-tags {
@@ -165,32 +161,48 @@ export default {
       margin-bottom: 12px;
     }
 
-    .account-center-team {
-      .members {
-        a {
-          display: block;
-          margin: 12px 0;
-          line-height: 24px;
-          height: 24px;
-
-          .member {
-            font-size: 14px;
-            color: rgba(0, 0, 0, 0.65);
-            line-height: 24px;
-            max-width: 100px;
-            vertical-align: top;
-            margin-left: 12px;
-            transition: all 0.3s;
-            display: inline-block;
-          }
-
-          &:hover {
-            span {
-              color: #1890ff;
-            }
-          }
-        }
+    .article-category {
+      .category-title {
+        padding-right: 24px;
+        padding-left: 24px;
       }
+
+      .categories {
+        //.category-wrapper {
+        //  padding: 0;
+        //  width: 100%;
+        //  //.category {
+        //  //  font-size: 14px;
+        //  //  color: rgba(0, 0, 0, 0.65);
+        //  //  line-height: 24px;
+        //  //  max-width: 100px;
+        //  //  vertical-align: top;
+        //  //  margin-left: 24px;
+        //  //  transition: all 0.3s;
+        //  //  display: inline-block;
+        //  //}
+        //
+        //  &:hover {
+        //    span {
+        //      color: #1890ff;
+        //    }
+        //  }
+        //}
+      }
+    }
+  }
+
+  .card-background {
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: white;
+  }
+
+  .card-category {
+    margin-top: 18px;
+
+    /deep/ .ant-card-body {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 
@@ -198,6 +210,12 @@ export default {
     &-wrapper {
       padding-left: 0;
       padding-right: 0;
+      margin-top: 0;
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    .card-category {
       margin-top: 0;
     }
   }

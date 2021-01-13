@@ -1,9 +1,9 @@
 <template>
   <div class="app-footer-wrapper">
-    <a-descriptions title="" layout="vertical" size="small" style="font-size: 12px" :column="4">
-      <a-descriptions-item label="关于我">
+    <a-descriptions title="" layout="vertical" size="small" style="font-size: 12px" :column="{ xs: 1, sm: 4 }">
+      <a-descriptions-item label="后端地址">
         <template>
-          <span class="desc">{{ descriptions }}</span>
+          <a style="display: block">点击跳转</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="项目地址">
@@ -35,7 +35,7 @@ export default {
   name: 'AppFooter',
   data() {
     return {
-      descriptions: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+      descriptions: '90后\n靠着兴趣自学成为一名全粘工程师\n做过Android，写过Python\n如今快快乐乐的做着web前端',
       repositories: [
         { name: '博客web端', href: 'https://github.com/clam314/blog-web' },
         { name: '管理系统web端', href: 'https://github.com/clam314/blog-admin-web' },

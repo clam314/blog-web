@@ -3,25 +3,24 @@
     <a-layout-header class="app-header">
       <div class="app-header-wrapper">
         <div class="logo-wrapper">
-          <img class="logo" src="~assets/image/logo1.svg" />
+          <div class="logo" />
           <span class="logo-title">Web前端实验室</span>
         </div>
         <app-menu
-          v-if="menusVisible"
-          class="app-menu"
+          class="app-menu app-menu-normal"
           :menus="menus"
           them="dark"
           :selected="selectedKeys"
           @onItemClick="onMenuItemClick"
         />
-        <div v-if="!menusVisible" class="app-header-wrapper-right">
-          <menu-icon-omit v-model="drawerVisible" style="font-size: 20px; color: white" />
+        <div class="app-header-wrapper-right">
+          <menu-icon-omit v-model="drawerVisible" class="menu-icon-omit" />
         </div>
       </div>
     </a-layout-header>
-    <div class="menus2-wrapper" :class="{ 'menus2-open': drawerVisible }">
+    <div class="menus2-wrapper app-menu-drawer" :class="{ 'menus2-open': drawerVisible }">
       <app-menu
-        class="app-menu"
+        class="app-menu app-menu-drawer"
         :class="{ 'menu-show': drawerVisible }"
         :menus="menus"
         them="dark"
@@ -56,12 +55,12 @@ import AppMenu from '~/components/framework/AppMenu'
 //   },
 // ]
 
-function matchMedia(callback, width = 576) {
-  return () => {
-    const result = window.matchMedia(`(max-width: ${width}px)`).matches
-    callback(result)
-  }
-}
+// function matchMedia(callback, width = 576) {
+//   return () => {
+//     const result = window.matchMedia(`(max-width: ${width}px)`).matches
+//     callback(result)
+//   }
+// }
 
 export default {
   components: { AppFooter, AppMenu, DrawerMenu, MenuIconOmit },
@@ -81,11 +80,17 @@ export default {
     if (name) {
       this.selectedKeys = [name]
     }
-    const match = matchMedia((result) => {
-      this.menusVisible = !result
-    })
-    match()
-    window.onresize = match
+    // const match = matchMedia((result) => {
+    //   this.menusVisible = !result
+    // })
+    // match()
+    // window.onresize = match
+    const _this = this
+    window.onresize = function () {
+      if (_this.drawerVisible) {
+        _this.drawerVisible = false
+      }
+    }
   },
   methods: {
     onMenuItemClick(item) {
@@ -122,8 +127,6 @@ export default {
   line-height: @app-header-height;
 
   &-wrapper {
-    padding-right: @app-max-width-margin;
-    padding-left: @app-max-width-margin;
     width: @app-max-width;
     display: flex;
     justify-content: space-between;
@@ -131,15 +134,18 @@ export default {
 
     .logo-wrapper {
       height: @app-header-height;
+      padding-left: @app-max-width-margin*2;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
+    @logo-size: @app-header-height - 8px;
     .logo {
-      padding: 3px 0;
-      height: @app-header-height - 4px;
-      width: auto;
+      height: @logo-size;
+      width: @logo-size;
+      background: url('~assets/image/logo2.svg') no-repeat;
+      background-size: contain;
     }
 
     .logo-title {
@@ -157,11 +163,22 @@ export default {
 
     &-right {
       line-height: @app-header-height;
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
+
+      .menu-icon-omit {
+        display: none;
+        font-size: 20px;
+        color: white;
+        margin-right: @app-max-width-margin*2;
+      }
     }
   }
+}
+
+/deep/ .nav-text {
+  font-size: 16px;
 }
 
 .menus2-wrapper {
@@ -179,6 +196,7 @@ export default {
     font-size: 16px;
     opacity: 0;
     transition: 0.8s @ease-in-out-quint;
+    display: none;
   }
 
   .menu-show {
@@ -203,5 +221,22 @@ export default {
 .app-footer {
   background-color: @app-footer-background-color;
   width: 100%;
+}
+
+@media screen and (max-width: @screen-sm) {
+  .app-menu-drawer {
+    display: block !important;
+  }
+  .app-menu-normal {
+    display: none !important;
+  }
+
+  .app-header-wrapper-right {
+    display: flex !important;
+  }
+
+  .menu-icon-omit {
+    display: block !important;
+  }
 }
 </style>

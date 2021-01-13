@@ -25,7 +25,7 @@ export default {}
 
   &-1 {
     width: 100%;
-    height: calc(1080px - @app-header-height);
+    height: calc(500px - @app-header-height);
 
     position: relative;
     background-image: url(https://acg.toubiec.cn/random.php);
@@ -51,6 +51,13 @@ export default {}
   &-2 {
     width: 100%;
     height: 500px;
+    background-color: black;
+
+    &-wrapper {
+      height: 100%;
+      background: url('~assets/image/logo2.svg') no-repeat;
+      //background-size: 40px 40px;
+    }
   }
 }
 </style>

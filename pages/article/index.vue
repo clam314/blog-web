@@ -1,25 +1,25 @@
 <template>
   <div class="main-content">
     <div class="main-content-wrapper">
-      <a-row :gutter="24">
-        <a-col :md="24" :lg="7">
+      <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
+        <a-col :sm="24" :lg="6">
           <a-card :bordered="false">
-            <div class="account-center-avatarHolder">
+            <div class="user-info">
               <div class="avatar">
                 <img :src="avatar" />
               </div>
               <div class="username">{{ nickName }}</div>
               <div v-if="userInfo.introduction" class="bio">{{ userInfo.introduction }}</div>
             </div>
-            <div class="account-center-detail">
+            <div class="user-details">
               <p v-if="userInfo.email"><a-icon type="mail" />{{ userInfo.email }}</p>
               <!--            <p v-if="userInfo.lastLoginIp"><a-icon type="global" />{{ userInfo.lastLoginIp }}</p>-->
               <!--            <p v-if="userInfo.lastLoginTime"><a-icon type="history" />{{ Number(userInfo.lastLoginTime) | moment }}</p>-->
             </div>
             <a-divider />
 
-            <div class="account-center-tags">
-              <div class="tagsTitle">标签</div>
+            <div class="user-tags">
+              <div class="tags-title">标签</div>
               <template v-for="(tag, index) in tags">
                 <a-tooltip v-if="tag.length > 20" :key="index" :title="tag">
                   <a-tag :key="index" :closable="false">{{ `${tag.slice(0, 20)}...` }}</a-tag>
@@ -42,9 +42,8 @@
             </div>
           </a-card>
         </a-col>
-        <a-col :md="24" :lg="17">
+        <a-col :sm="24" :lg="18">
           <a-card
-            style="width: 100%"
             :bordered="false"
             :tabList="tabListNoTitle"
             :activeTabKey="noTitleKey"
@@ -69,7 +68,7 @@ export default {
   data() {
     return {
       teams: ['很有想法的', '专注设计', '辣~', '大长腿', '川妹子', '海纳百川'],
-      noTitleKey: 'app',
+      noTitleKey: 'article',
       tabListNoTitle: [
         {
           key: 'article',
@@ -99,9 +98,11 @@ export default {
 
   &-wrapper {
     max-width: @app-max-width;
-    margin: 0 auto;
+    padding-left: @app-max-width-margin * 2;
+    padding-right: @app-max-width-margin*2;
+    margin: 18px auto 0 auto;
 
-    .account-center-avatarHolder {
+    .user-info {
       text-align: center;
       margin-bottom: 24px;
 
@@ -126,7 +127,7 @@ export default {
       }
     }
 
-    .account-center-detail {
+    .user-details {
       p {
         margin-bottom: 8px;
         padding-left: 26px;
@@ -152,13 +153,13 @@ export default {
       }
     }
 
-    .account-center-tags {
+    .user-tags {
       .ant-tag {
         margin-bottom: 8px;
       }
     }
 
-    .tagsTitle {
+    .tags-title {
       font-weight: 500;
       color: rgba(0, 0, 0, 0.85);
       margin-bottom: 12px;
@@ -190,6 +191,14 @@ export default {
           }
         }
       }
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    &-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 0;
     }
   }
 }

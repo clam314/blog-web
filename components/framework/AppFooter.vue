@@ -41,7 +41,7 @@ export default {
 @import '~assets/style/config.less';
 .app-footer-wrapper {
   margin: 0 auto;
-  max-width: @app-max-width;
+  max-width: @app-max-content-width;
 
   @footer-table-font-size: 12px;
   a {

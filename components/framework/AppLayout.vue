@@ -40,9 +40,22 @@ import AppFooter from '@/components/framework/AppFooter'
 import DrawerMenu from '~/components/framework/DrawerMenu'
 import AppMenu from '~/components/framework/AppMenu'
 
-function matchMedia(callback, width = '738px') {
+// 单位px
+// const media = [
+//   {
+//     xs: 1,
+//     sm: 576,
+//     md: 768,
+//     lg: 992,
+//     xl: 1200,
+//     xxl: 1600,
+//   },
+// ]
+
+function matchMedia(callback, width = 576) {
+  console.log(width)
   return () => {
-    const result = window.matchMedia(`(max-width: ${width})`).matches
+    const result = window.matchMedia(`(max-width: ${width}px)`).matches
     callback(result)
   }
 }
@@ -62,7 +75,9 @@ export default {
   },
   mounted() {
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
-    this.selectedKeys = [name || this.menus[0].name]
+    if (name) {
+      this.selectedKeys = [name]
+    }
     const match = matchMedia((result) => {
       this.drawerVisible = result
       this.menusVisible = !result
@@ -111,7 +126,8 @@ export default {
   line-height: @app-header-height;
 
   &-wrapper {
-    padding: 0 10px;
+    padding-right: @app-max-width-margin;
+    padding-left: @app-max-width-margin;
     width: @app-max-width;
     display: flex;
     justify-content: space-between;

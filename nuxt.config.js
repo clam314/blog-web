@@ -14,7 +14,7 @@ export default {
   css: ['~assets/style/reset', '~assets/style/variables'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/antd-ui', { src: '~plugins/filter/index.js', ssr: false }],
+  plugins: ['@/plugins/antd-ui', '~plugins/filter/index.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

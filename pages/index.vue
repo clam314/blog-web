@@ -28,7 +28,7 @@ export default {
 
   &-1 {
     width: 100%;
-    height: calc(500px - @app-header-height);
+    height: calc(100vh - @app-header-height);
 
     position: relative;
     background-image: url(https://acg.toubiec.cn/random.php);

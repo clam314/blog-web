@@ -2,26 +2,29 @@
   <a-list size="large" rowKey="id" :loading="loading" itemLayout="vertical" :dataSource="data">
     <a-list-item :key="item.id" slot="renderItem" slot-scope="item">
       <template slot="actions">
-        <icon-text type="star-o" :text="item.star" />
+        <icon-text type="eye" :text="item.reads" />
         <icon-text type="like-o" :text="item.like" />
-        <icon-text type="message" :text="item.message" />
+        <icon-text type="message" :text="item.comments" />
       </template>
       <a-list-item-meta>
-        <a slot="title" href="https://vue.ant.design/">{{ item.title }}</a>
+        <a slot="title" class="article-title" @click="handleTitleClick(item.id)">{{ item.title }}</a>
         <template slot="description">
-          <span>
-            <a-tag>Ant Design</a-tag>
-            <a-tag>设计语言</a-tag>
-            <a-tag>蚂蚁金服</a-tag>
-          </span>
+          <icon-text type="tags" :text="item.tags.length === 0 ? '未分类' : ''" />
+          <template v-for="(tag, index) in item.tags">
+            <a-tooltip v-if="tag.length > 20" :key="index" :title="tag">
+              <a-tag :key="index" :closable="false">{{ `${tag.slice(0, 20)}...` }}</a-tag>
+            </a-tooltip>
+            <a-tag v-else :key="index" :closable="false">{{ tag }}</a-tag>
+          </template>
         </template>
       </a-list-item-meta>
+      <img v-if="item.des_image !== ''" slot="extra" class="article-img" alt="logo" :src="item.des_image" />
       <article-list-content
         :description="item.description"
-        :owner="item.owner"
-        :avatar="item.avatar"
-        :href="item.href"
-        :updateAt="item.updatedAt"
+        :owner="item.userInfo.name"
+        :avatar="item.userInfo.avatar"
+        :category="item.category"
+        :updateAt="Number(item.publishedTime)"
       />
     </a-list-item>
     <div v-if="data.length > 0" slot="footer" style="text-align: center; margin-top: 16px">
@@ -46,190 +49,148 @@ export default {
       loadingMore: false,
       data: [
         {
-          id: 1,
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-          owner: '付小小',
-          content:
-            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
-          star: 817,
-          percent: 29,
-          like: 902,
-          message: 236,
+          id: '5ff34acfdb4b000082005c46',
           description:
-            '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-          href: 'https://ant.design',
-          title: 'Alipay',
-          updatedAt: '2006-12-13 07:21:28',
-          members: [
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
-              name: '曲丽丽',
-              id: 'member1',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
-              name: '王昭君',
-              id: 'member2',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
-              name: '董娜娜',
-              id: 'member3',
-            },
-          ],
-          activeUser: 102573,
-          newUser: 1211,
-          cover: 'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
+            '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
+          des_image: 'https://acg.toubiec.cn/random.php',
+          content: '',
+          reads: 8869,
+          like: 345,
+          comments: 123,
+          converse: 0,
+          tags: ['bug'],
+          userInfo: {
+            avatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+            name: 'Woods',
+          },
+          category: 'Android',
+          title: '在CentOS 7上部署kubernetes v1.18',
+          contentHtml: '',
+          publishedTime: '1610199932169',
         },
         {
-          id: 2,
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
-          owner: '林东东',
-          content:
-            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
-          star: 222,
-          percent: 348,
-          like: 183,
-          message: 135,
+          id: '5ff34acfdb4b000082005c46',
           description:
-            '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-          href: 'https://ant.design',
-          title: 'Angular',
-          updatedAt: '1999-05-12 19:56:48',
-          members: [
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
-              name: '曲丽丽',
-              id: 'member1',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
-              name: '王昭君',
-              id: 'member2',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
-              name: '董娜娜',
-              id: 'member3',
-            },
-          ],
-          activeUser: 186167,
-          newUser: 1965,
-          cover: 'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
+            '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
+          des_image: 'https://acg.toubiec.cn/random.php',
+          content: '',
+          reads: 8869,
+          like: 345,
+          comments: 123,
+          converse: 0,
+          tags: ['bug'],
+          userInfo: {
+            avatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+            name: 'Woods',
+          },
+          category: 'Android',
+          title: '在CentOS 7上部署kubernetes v1.18',
+          contentHtml: '',
+          publishedTime: '1610199932169',
         },
         {
-          id: 3,
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
-          owner: '林东东',
-          content:
-            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
-          star: 329,
-          percent: 202,
-          like: 589,
-          message: 28,
+          id: '5ff34acfdb4b000082005c46',
           description:
-            '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-          href: 'https://ant.design',
-          title: 'Ant Design',
-          updatedAt: '1991-05-17 01:05:14',
-          members: [
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
-              name: '曲丽丽',
-              id: 'member1',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
-              name: '王昭君',
-              id: 'member2',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
-              name: '董娜娜',
-              id: 'member3',
-            },
-          ],
-          activeUser: 142455,
-          newUser: 1134,
-          cover: 'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png',
+            '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
+          des_image: 'https://acg.toubiec.cn/random.php',
+          content: '',
+          reads: 8869,
+          like: 345,
+          comments: 123,
+          converse: 0,
+          tags: ['bug'],
+          userInfo: {
+            avatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+            name: 'Woods',
+          },
+          category: 'Android',
+          title: '在CentOS 7上部署kubernetes v1.18',
+          contentHtml: '',
+          publishedTime: '1610199932169',
         },
         {
-          id: 4,
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-          owner: '付小小',
-          content:
-            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
-          star: 735,
-          percent: 57,
-          like: 333,
-          message: 474,
+          id: '5ff34acfdb4b000082005c46',
           description:
-            '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-          href: 'https://ant.design',
-          title: 'Ant Design Pro',
-          updatedAt: '1993-04-16 02:20:06',
-          members: [
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
-              name: '曲丽丽',
-              id: 'member1',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
-              name: '王昭君',
-              id: 'member2',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
-              name: '董娜娜',
-              id: 'member3',
-            },
-          ],
-          activeUser: 104136,
-          newUser: 1671,
-          cover: 'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
+            '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
+          des_image: 'https://acg.toubiec.cn/random.php',
+          content: '',
+          reads: 8869,
+          like: 345,
+          comments: 123,
+          converse: 0,
+          tags: ['bug'],
+          userInfo: {
+            avatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+            name: 'Woods',
+          },
+          category: 'Android',
+          title: '在CentOS 7上部署kubernetes v1.18',
+          contentHtml: '',
+          publishedTime: '1610199932169',
         },
         {
-          id: 5,
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
-          owner: '吴加好',
-          content:
-            '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
-          star: 587,
-          percent: 558,
-          like: 194,
-          message: 798,
+          id: '5ff34acfdb4b000082005c46',
           description:
-            '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-          href: 'https://ant.design',
-          title: 'Bootstrap',
-          updatedAt: '1996-06-09 13:00:14',
-          members: [
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
-              name: '曲丽丽',
-              id: 'member1',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
-              name: '王昭君',
-              id: 'member2',
-            },
-            {
-              avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
-              name: '董娜娜',
-              id: 'member3',
-            },
-          ],
-          activeUser: 136484,
-          newUser: 1888,
-          cover: 'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
+            '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
+          des_image: 'https://acg.toubiec.cn/random.php',
+          content: '',
+          reads: 8869,
+          like: 345,
+          comments: 123,
+          converse: 0,
+          tags: ['bug'],
+          userInfo: {
+            avatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL10sEwZxL-CHCF5179HGJlhCt8vQ7v6_-w&usqp=CAU',
+            name: 'Woods',
+          },
+          category: 'Android',
+          title: '在CentOS 7上部署kubernetes v1.18',
+          contentHtml: '',
+          publishedTime: '1610199932169',
         },
       ],
     }
   },
-  mounted() {},
+  methods: {
+    handleTitleClick(tid) {
+      this.$router.push({
+        path: 'article/details',
+        query: {
+          tid,
+        },
+      })
+    },
+  },
 }
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+@import '~assets/style/variables.less';
+@import '~assets/style/config.less';
+
+// 修复 antv list组件 actions插槽莫名其妙多了空li元素的问题
+/deep/ .ant-list-item-action > li:nth-child(even) {
+  display: none;
+}
+
+.article-title {
+  color: @article-title-color !important;
+}
+
+@img-width: 278px;
+.article-img {
+  width: @img-width;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+  @media only screen and (max-width: @screen-sm) {
+    width: 100%;
+    height: 180px;
+  }
+}
+</style>

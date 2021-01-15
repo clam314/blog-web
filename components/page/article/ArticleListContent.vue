@@ -7,7 +7,7 @@
     </div>
     <div class="extra">
       <a-avatar :src="avatar" size="small" />
-      <a :href="href">{{ owner }}</a> 发布在 <a :href="href">{{ href }}</a>
+      <span class="owner">{{ owner }}</span> 发布在 <span class="category">{{ category }}</span>
       <em>{{ updateAt | dayjs }}</em>
     </div>
   </div>
@@ -15,12 +15,7 @@
 
 <script>
 export default {
-  name: 'ArticleListContent',
   props: {
-    prefixCls: {
-      type: String,
-      default: 'antd-pro-components-article-list-content-index-listContent',
-    },
     description: {
       type: String,
       default: '',
@@ -33,12 +28,12 @@ export default {
       type: String,
       required: true,
     },
-    href: {
+    category: {
       type: String,
       required: true,
     },
     updateAt: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
   },
@@ -46,6 +41,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/config.less';
 @import '~assets/style/variables.less';
 .antd-pro-components-article-list-content-index-listContent {
   .description {
@@ -66,6 +62,11 @@ export default {
       vertical-align: top;
     }
 
+    & .owner,
+    & .category {
+      color: @article-category-color;
+    }
+
     & > em {
       margin-left: 16px;
       color: @disabled-color;
@@ -74,7 +75,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-xs) {
+@media screen and (max-width: @screen-sm) {
   .antd-pro-components-article-list-content-index-listContent {
     .extra {
       & > em {

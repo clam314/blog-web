@@ -68,6 +68,7 @@ export default {
 
 <style lang="less" scoped>
 @import '~assets/style/config.less';
+@import '~assets/style/variables.less';
 .main-content {
   width: 100%;
   height: 100%;
@@ -81,7 +82,7 @@ export default {
     margin: 18px auto 18px auto;
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: @screen-md) {
     &-wrapper {
       padding-left: 0;
       padding-right: 0;
@@ -93,7 +94,7 @@ export default {
     margin-top: 18px;
   }
 
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: @screen-lg) {
     .card-category {
       margin-top: 0;
     }

@@ -39,7 +39,7 @@ export default {
 
   &-2 {
     width: 100%;
-    min-height: 600px;
+    min-height: calc(100vh - @app-header-height);
     display: flex;
     justify-content: center;
 
@@ -52,13 +52,17 @@ export default {
 
   &-4 {
     width: 100%;
-    min-height: 600px;
+    min-height: calc(100vh - @app-header-height);
 
     position: relative;
     background-image: url(https://api.ixiaowai.cn/api/api.php);
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+  }
+  &-3 {
+    width: 100%;
+    height: calc(100vh - @app-header-height);
   }
 
   &-1::before,

@@ -7,3 +7,5 @@ export const avatar = (state) => state.avatar
 export const nickName = (state) => state.nickName
 
 export const tags = (state) => state.tags
+
+export const categories = (state) => state.categories

@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="main-content-wrapper">
       <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
-        <a-col :sm="24" :lg="6">
+        <a-col class="show-small-screen" :sm="24" :lg="6">
           <user-info />
           <article-categories
             class="card-category"
@@ -22,6 +22,15 @@
             <article-list />
           </a-card>
         </a-col>
+        <a-col class="show-big-screen" :sm="24" :lg="6">
+          <user-info />
+          <article-categories
+            class="card-category"
+            title="文章类别"
+            :categories="categories"
+            :selected="selectedCategory"
+          />
+        </a-col>
       </a-row>
     </div>
   </div>
@@ -38,6 +47,9 @@ export default {
     ArticleList,
     ArticleCategories,
     UserInfo,
+  },
+  async asyncData({ store }) {
+    await store.dispatch('GetUserInfo', process.env.APP_BID)
   },
   data() {
     return {
@@ -94,9 +106,23 @@ export default {
     margin-top: 18px;
   }
 
+  .show-small-screen {
+    display: none;
+  }
+  .show-big-screen {
+    display: unset;
+  }
+
   @media only screen and (max-width: @screen-lg) {
     .card-category {
       margin-top: 0;
+    }
+
+    .show-small-screen {
+      display: unset;
+    }
+    .show-big-screen {
+      display: none;
     }
   }
 }

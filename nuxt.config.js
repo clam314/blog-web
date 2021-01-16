@@ -14,7 +14,7 @@ export default {
   css: ['~assets/style/reset', '~assets/style/variables'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/antd-ui', '~plugins/filter/index.js'],
+  plugins: ['@/plugins/antd-ui', '~plugins/filter/index.js', '@/plugins/axios', '@/plugins/api-center'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -26,16 +26,27 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/axios', '@nuxtjs/proxy'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/dotenv'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    parallel: true,
     loaders: {
       less: {
         lessOptions: {
           javascriptEnabled: true,
         },
       },
+    },
+  },
+  axios: {
+    proxy: true,
+  },
+
+  proxy: {
+    '/blog': {
+      target: 'http://127.0.0.1:4000/api',
+      changeOrigin: true,
     },
   },
 }

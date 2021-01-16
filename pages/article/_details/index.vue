@@ -28,6 +28,9 @@ export default {
     UserInfo,
     ArticleCategories,
   },
+  async asyncData({ store }) {
+    await store.dispatch('GetUserInfo', process.env.APP_BID)
+  },
   data() {
     return {
       selectedCategory: ['全部'],

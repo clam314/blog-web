@@ -96,8 +96,8 @@ export default {
 
   @media only screen and (max-width: @screen-md) {
     &-wrapper {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 5px;
+      padding-right: 5px;
       margin-top: 0;
     }
   }

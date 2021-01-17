@@ -45,7 +45,7 @@ export default {
 
   proxy: {
     '/blog': {
-      target: 'http://127.0.0.1:4000/api',
+      target: 'http://192.168.50.13:4000/api',
       changeOrigin: true,
     },
   },

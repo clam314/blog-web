@@ -47,9 +47,12 @@ export default {
     return {
       loading: false,
       loadingMore: false,
+      noMore: false,
+      pageNum: 0,
+      pageCount: 15,
       data: [
         {
-          id: '5ff34acfdb4b000082005c46',
+          id: '5ff348871f073a5538113313',
           description:
             '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
           des_image: 'https://acg.toubiec.cn/random.php',
@@ -70,7 +73,7 @@ export default {
           publishedTime: '1610199932169',
         },
         {
-          id: '5ff34acfdb4b000082005c46',
+          id: '5ff348871f073a5538113313',
           description:
             '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
           des_image: 'https://acg.toubiec.cn/random.php',
@@ -91,7 +94,7 @@ export default {
           publishedTime: '1610199932169',
         },
         {
-          id: '5ff34acfdb4b000082005c46',
+          id: '5ff348871f073a5538113313',
           description:
             '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
           des_image: 'https://acg.toubiec.cn/random.php',
@@ -112,7 +115,7 @@ export default {
           publishedTime: '1610199932169',
         },
         {
-          id: '5ff34acfdb4b000082005c46',
+          id: '5ff348871f073a5538113313',
           description:
             '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
           des_image: 'https://acg.toubiec.cn/random.php',
@@ -133,7 +136,7 @@ export default {
           publishedTime: '1610199932169',
         },
         {
-          id: '5ff34acfdb4b000082005c46',
+          id: '5ff348871f073a5538113313',
           description:
             '官方文档指出k8s在安装kubeadm时需要使用iptables作为后端，但CentOS 8已经使用nftable无法切换，存在兼容性问题！本次采用网络部署，需要梯子，docker和k8s的安装包基本都在需要',
           des_image: 'https://acg.toubiec.cn/random.php',
@@ -165,6 +168,7 @@ export default {
         },
       })
     },
+    getArticles() {},
   },
 }
 </script>

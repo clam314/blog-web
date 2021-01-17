@@ -2,7 +2,7 @@
   <div class="main-content">
     <div class="main-content-wrapper">
       <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
-        <a-col :sm="24" :lg="6">
+        <a-col class="show-small-screen" :sm="24" :lg="6">
           <user-info />
           <article-categories
             class="card-category"
@@ -12,7 +12,32 @@
           />
         </a-col>
         <a-col :sm="24" :lg="18">
-          <a-card class="card-background" :bordered="false"> </a-card>
+          <a-card class="card-background" :bordered="false">
+            <div class="article-info-wrapper" :style="{ backgroundImage: `url(${cardImg})` }">
+              <div class="article-info">
+                <span class="article-info-title">{{ article ? article.title : '' }}</span>
+                <div style="display: flex; justify-content: center; align-items: center">
+                  <icon-text class="article-info-num" type="eye" :text="article ? article.reads : 0" />
+                  <a-divider class="article-info-divider" type="vertical" />
+                  <icon-text class="article-info-num" type="like-o" :text="article ? article.like : 0" />
+                  <a-divider class="article-info-divider" type="vertical" />
+                  <icon-text class="article-info-num" type="message" :text="article ? article.comments : 0" />
+                </div>
+              </div>
+            </div>
+            <!--            eslint-disable-next-line-->
+            <div class="markdown-body"  v-html="article.contentHtml" />
+          </a-card>
+        </a-col>
+        <!--        根据屏幕大小显示不同地方的个人信息-->
+        <a-col class="show-big-screen" :sm="24" :lg="6">
+          <user-info />
+          <article-categories
+            class="card-category"
+            title="文章类别"
+            :categories="categories"
+            :selected="selectedCategory"
+          />
         </a-col>
       </a-row>
     </div>
@@ -28,19 +53,48 @@ export default {
     UserInfo,
     ArticleCategories,
   },
-  async asyncData({ store }) {
-    await store.dispatch('GetUserInfo', process.env.APP_BID)
+  async asyncData({ app, store, query }) {
+    console.log(query)
+    const [, data] = await Promise.all([
+      store.dispatch('GetUserInfo', process.env.APP_BID),
+      app.$Api.article.getArticleDetail({ bid: process.env.APP_BID, tid: query.tid }),
+    ])
+    return { article: data.result }
   },
   data() {
     return {
       selectedCategory: ['全部'],
       categories: ['全部', 'Android', 'CSS', 'HTML', 'Docker', '前端', '随笔'],
+      article: {},
     }
+  },
+  computed: {
+    cardImg() {
+      if (this.article && this.article.des_image) {
+        return this.article.des_image
+      } else {
+        return 'https://acg.yanwz.cn/wallpaper/api.php'
+      }
+    },
+  },
+  beforeMount() {
+    const linkMd = document.createElement('link')
+    linkMd.rel = 'stylesheet'
+    linkMd.href = 'https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css'
+    const linkHeightLight = document.createElement('link')
+    linkHeightLight.rel = 'stylesheet'
+    linkHeightLight.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/paraiso-dark.min.css'
+    const scriptHeightLight = document.createElement('script')
+    scriptHeightLight.src = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js'
+    document.head.appendChild(linkMd)
+    document.head.appendChild(linkHeightLight)
+    document.head.appendChild(scriptHeightLight)
   },
 }
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/variables.less';
 @import '~assets/style/config.less';
 .main-content {
   width: 100%;
@@ -53,12 +107,87 @@ export default {
     padding-left: @app-max-width-margin * 2;
     padding-right: @app-max-width-margin*2;
     margin: 18px auto 18px auto;
+
+    .article-info-wrapper {
+      width: 100%;
+      height: 350px;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      //background-attachment: fixed;
+      margin-bottom: 20px;
+      @media only screen and (max-width: @screen-sm) {
+        height: 180px;
+      }
+
+      .article-info {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: saturate(180%) blur(20px);
+        background-color: rgba(0, 0, 0, 0.3);
+
+        &-title {
+          color: white;
+          font-size: 32px;
+          margin-bottom: 20px;
+        }
+
+        &-num {
+          color: white;
+          font-size: 18px;
+        }
+        &-num:not(:last-of-type) {
+          margin-right: 20px;
+          border-right-color: white;
+        }
+
+        &-divider {
+          margin-top: 5px;
+          margin-right: 20px;
+        }
+
+        @media only screen and (max-width: @screen-md) {
+          &-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+          }
+
+          &-num {
+            color: white;
+            font-size: 14px;
+          }
+          &-num:not(:last-of-type) {
+            margin-right: 10px;
+            border-right-color: white;
+          }
+
+          &-divider {
+            margin-top: 2px;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
   }
 
-  @media only screen and (max-width: 576px) {
+  /deep/ .markdown-body pre {
+    padding: 0;
+  }
+
+  @media only screen and (max-width: @screen-md) {
     &-wrapper {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 1px;
+      padding-right: 1px;
       margin-top: 0;
     }
   }
@@ -66,10 +195,23 @@ export default {
   .card-category {
     margin-top: 18px;
   }
+  .show-small-screen {
+    display: none;
+  }
+  .show-big-screen {
+    display: unset;
+  }
 
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: @screen-lg) {
     .card-category {
       margin-top: 0;
+    }
+
+    .show-small-screen {
+      display: unset;
+    }
+    .show-big-screen {
+      display: none;
     }
   }
 }

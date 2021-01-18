@@ -2,7 +2,7 @@
   <a-card :bordered="false" class="card-background">
     <div class="user-info">
       <div class="avatar">
-        <img :src="avatar" />
+        <img :src="avatar" :onerror="defaultAvatar" />
       </div>
       <div class="username">{{ nickName }}</div>
       <div v-if="userInfo.introduction" class="bio">{{ userInfo.introduction }}</div>
@@ -28,6 +28,9 @@ export default {
   name: 'UserInfo',
   computed: {
     ...mapGetters(['nickName', 'avatar', 'userInfo', 'tags']),
+    defaultAvatar() {
+      return `this.src="${require('@/assets/image/avatar.jpg')}"`
+    },
   },
 }
 </script>

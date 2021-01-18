@@ -40,6 +40,7 @@
           />
         </a-col>
       </a-row>
+      <back-top />
     </div>
   </div>
 </template>
@@ -47,14 +48,15 @@
 <script>
 import UserInfo from '@/components/page/article/UserInfo'
 import ArticleCategories from '@/components/page/article/ArticleCategories'
+import BackTop from '@/components/basic/BackTop'
 
 export default {
   components: {
+    BackTop,
     UserInfo,
     ArticleCategories,
   },
   async asyncData({ app, store, query }) {
-    console.log(query)
     const [, data] = await Promise.all([
       store.dispatch('GetUserInfo', process.env.APP_BID),
       app.$Api.article.getArticleDetail({ bid: process.env.APP_BID, tid: query.tid }),
@@ -107,6 +109,7 @@ export default {
     padding-left: @app-max-width-margin * 2;
     padding-right: @app-max-width-margin*2;
     margin: 18px auto 18px auto;
+    overflow: hidden;
 
     .article-info-wrapper {
       width: 100%;

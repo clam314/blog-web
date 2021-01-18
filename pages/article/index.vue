@@ -32,6 +32,7 @@
           />
         </a-col>
       </a-row>
+      <back-top />
     </div>
   </div>
 </template>

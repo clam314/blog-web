@@ -1,5 +1,5 @@
 <template>
-  <a-list size="large" rowKey="tid" :loading="loading" itemLayout="vertical" :dataSource="articles">
+  <a-list size="large" rowKey="tid" itemLayout="vertical" :dataSource="articleList.list">
     <a-list-item :key="item.tid" slot="renderItem" slot-scope="item">
       <template slot="actions">
         <icon-text type="eye" :text="item.reads" />
@@ -27,9 +27,7 @@
         :updateAt="Number(item.publishedTime)"
       />
     </a-list-item>
-    <div v-if="articles.length > 0" slot="footer" style="text-align: center; margin-top: 16px">
-      <a-button>加载更多</a-button>
-    </div>
+    <infinite-loading @infinite="infiniteHandler" />
   </a-list>
 </template>
 
@@ -42,19 +40,19 @@ export default {
     IconText,
     ArticleListContent,
   },
+  model: {
+    prop: 'articleList',
+    event: 'more',
+  },
   props: {
-    articles: {
-      type: Array,
-      default: () => {
-        return []
-      },
+    articleList: {
+      type: Object,
       required: true,
     },
   },
   data() {
     return {
       loading: false,
-      loadingMore: false,
       noMore: false,
     }
   },
@@ -66,6 +64,37 @@ export default {
           tid,
         },
       })
+    },
+    infiniteHandler($state) {
+      console.log('onLoadMore')
+      const param = {
+        bid: process.env.APP_BID,
+        pageNum: this.articleList.pageNum,
+        pageCount: this.articleList.pageCount,
+      }
+      this.$Api.article
+        .getArticles(param)
+        .then((data) => {
+          if (data.head && data.head.respCode === 200) {
+            this.articleList.pageNum = data.result.pageNum + 1
+            this.articleList.total = data.result.total
+            this.articleList.list.push.apply(this.articleList.list, data.result.list)
+            this.noMore = this.articleList.list.length >= this.articleList.total - 1
+            this.$emit('more', this.articleList)
+          } else {
+            this.$message.error(data.head.respMsg)
+          }
+          console.log('loaded')
+          $state.loaded()
+          if (this.noMore) {
+            console.log('noMore:', this.articleList.list.length)
+            $state.complete()
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+          $state.loaded()
+        })
     },
   },
 }

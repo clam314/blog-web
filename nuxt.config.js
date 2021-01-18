@@ -14,7 +14,13 @@ export default {
   css: ['~assets/style/reset', '~assets/style/variables'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/antd-ui', '~plugins/filter/index.js', '@/plugins/axios', '@/plugins/api-center'],
+  plugins: [
+    '@/plugins/antd-ui',
+    '@/plugins/filter/index.js',
+    '@/plugins/axios',
+    '@/plugins/api-center',
+    { src: '~plugins/vue-infinite-scroll.js', ssr: false },
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

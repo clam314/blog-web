@@ -14,7 +14,7 @@
             :activeTabKey="noTitleKey"
             @tabChange="(key) => handleTabChange(key, 'noTitleKey')"
           >
-            <article-list :articles="articleList.list" />
+            <article-list v-model="articleList" />
           </a-card>
         </a-col>
         <a-col class="show-big-screen" :sm="24" :lg="6">
@@ -42,7 +42,7 @@ export default {
     const parameter = {
       bid: process.env.APP_BID,
       pageNum: 0,
-      pageCount: 15,
+      pageCount: 5,
     }
     if (query.fid) {
       parameter.fid = query.fid
@@ -52,49 +52,37 @@ export default {
       store.dispatch('GetCategories', process.env.APP_BID),
       app.$Api.article.getArticles(parameter),
     ])
-    return { articleList: data.result }
+    if (data.head && data.head.respCode === 200) {
+      data.result.pageNum = data.result.pageNum + 1
+      return { articleList: data.result }
+    }
   },
   data() {
     return {
       noTitleKey: 'article',
-      tabListNoTitle: [
-        {
-          key: 'article',
-          tab: '文章(8)',
-        },
-      ],
       articleList: {
         pageNum: 0,
-        pageCount: 15,
+        pageCount: 5,
         list: [],
         total: 0,
       },
     }
+  },
+  computed: {
+    tabListNoTitle() {
+      return [
+        {
+          key: 'article',
+          tab: `文章(${this.articleList.total})`,
+        },
+      ]
+    },
   },
   methods: {
     handleTabChange(key, type) {
       this[type] = key
     },
     handleCategoryChange(fid) {},
-    async handleArticleMore() {
-      const param = {
-        bid: process.env.APP_BID,
-        pageNum: this.articleList.pageNum,
-        pageCount: this.articleList.pageCount,
-      }
-      try {
-        const data = await this.$App.article.getArticles(param)
-        if (data.head && data.head.respCode === 200) {
-          this.articleList.pageNum = data.result.pageNum + 1
-          this.articleList.total = data.result.total
-          this.articleList.list.push(this.articleList.list, data.result.list)
-        } else {
-          this.$message.error(data.head.respMsg)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    },
   },
 }
 </script>

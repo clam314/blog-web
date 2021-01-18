@@ -4,12 +4,7 @@
       <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
         <a-col class="show-small-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories
-            class="card-category"
-            title="文章类别"
-            :categories="categories"
-            :selected="selectedCategory"
-          />
+          <article-categories class="card-category" @change="onCategoryItemClick" />
         </a-col>
         <a-col :sm="24" :lg="18">
           <a-card class="card-background" :bordered="false">
@@ -32,12 +27,7 @@
         <!--        根据屏幕大小显示不同地方的个人信息-->
         <a-col class="show-big-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories
-            class="card-category"
-            title="文章类别"
-            :categories="categories"
-            :selected="selectedCategory"
-          />
+          <article-categories class="card-category" @change="onCategoryItemClick" />
         </a-col>
       </a-row>
       <back-top />
@@ -57,16 +47,15 @@ export default {
     ArticleCategories,
   },
   async asyncData({ app, store, query }) {
-    const [, data] = await Promise.all([
+    const [, , data] = await Promise.all([
       store.dispatch('GetUserInfo', process.env.APP_BID),
+      store.dispatch('GetCategories', process.env.APP_BID),
       app.$Api.article.getArticleDetail({ bid: process.env.APP_BID, tid: query.tid }),
     ])
     return { article: data.result }
   },
   data() {
     return {
-      selectedCategory: ['全部'],
-      categories: ['全部', 'Android', 'CSS', 'HTML', 'Docker', '前端', '随笔'],
       article: {},
     }
   },
@@ -91,6 +80,11 @@ export default {
     document.head.appendChild(linkMd)
     document.head.appendChild(linkHeightLight)
     document.head.appendChild(scriptHeightLight)
+  },
+  methods: {
+    onCategoryItemClick(item) {
+      console.log(item)
+    },
   },
 }
 </script>

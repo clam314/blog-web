@@ -43,6 +43,13 @@ export default {
     IconText,
     ArticleListContent,
   },
+  async asyncData({ app, store, query }) {
+    const [, data] = await Promise.all([
+      store.dispatch('GetUserInfo', process.env.APP_BID),
+      app.$Api.article.getArticleDetail({ bid: process.env.APP_BID, tid: query.tid }),
+    ])
+    return { article: data.result }
+  },
   data() {
     return {
       loading: false,

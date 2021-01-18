@@ -4,12 +4,7 @@
       <a-row :gutter="{ sm: 0, md: 12, lg: 18 }">
         <a-col class="show-small-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories
-            class="card-category"
-            title="文章类别"
-            :categories="categories"
-            :selected="selectedCategory"
-          />
+          <article-categories class="card-category" @change="handleCategoryChange" />
         </a-col>
         <a-col :sm="24" :lg="18">
           <a-card
@@ -24,12 +19,7 @@
         </a-col>
         <a-col class="show-big-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories
-            class="card-category"
-            title="文章类别"
-            :categories="categories"
-            :selected="selectedCategory"
-          />
+          <article-categories class="card-category" @change="handleCategoryChange" />
         </a-col>
       </a-row>
       <back-top />
@@ -50,12 +40,13 @@ export default {
     UserInfo,
   },
   async asyncData({ store }) {
-    await store.dispatch('GetUserInfo', process.env.APP_BID)
+    await Promise.all([
+      store.dispatch('GetUserInfo', process.env.APP_BID),
+      store.dispatch('GetCategories', process.env.APP_BID),
+    ])
   },
   data() {
     return {
-      selectedCategory: ['全部'],
-      categories: ['全部', 'Android', 'CSS', 'HTML', 'Docker', '前端', '随笔'],
       noTitleKey: 'article',
       tabListNoTitle: [
         {
@@ -72,9 +63,7 @@ export default {
     handleTabChange(key, type) {
       this[type] = key
     },
-    onMenuClick(item) {
-      this.selectedCategory = [item.key]
-    },
+    handleCategoryChange(fid) {},
   },
 }
 </script>

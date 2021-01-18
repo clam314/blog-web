@@ -27,7 +27,7 @@
         <!--        根据屏幕大小显示不同地方的个人信息-->
         <a-col class="show-big-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories class="card-category" @change="onCategoryItemClick" />
+          <article-categories ref="categories" class="card-category" @change="onCategoryItemClick" />
         </a-col>
       </a-row>
       <back-top />
@@ -80,6 +80,9 @@ export default {
     document.head.appendChild(linkMd)
     document.head.appendChild(linkHeightLight)
     document.head.appendChild(scriptHeightLight)
+  },
+  mounted() {
+    this.$refs.categories.changeSelected(this.article.fid)
   },
   methods: {
     onCategoryItemClick(item) {
@@ -136,7 +139,8 @@ export default {
         &-title {
           color: white;
           font-size: 32px;
-          margin-bottom: 20px;
+          margin: 0 50px 20px;
+          text-align: center;
         }
 
         &-num {

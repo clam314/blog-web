@@ -14,7 +14,7 @@
             :activeTabKey="noTitleKey"
             @tabChange="(key) => handleTabChange(key, 'noTitleKey')"
           >
-            <article-list />
+            <article-list :articles="articleList.list" />
           </a-card>
         </a-col>
         <a-col class="show-big-screen" :sm="24" :lg="6">
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import ArticleCategories from '@/components/page/article/ArticleCategories'
 import UserInfo from '@/components/page/article/UserInfo'
 import ArticleList from '~/components/page/article/ArticleList'
@@ -39,11 +38,21 @@ export default {
     ArticleCategories,
     UserInfo,
   },
-  async asyncData({ store }) {
-    await Promise.all([
+  async asyncData({ app, store, query }) {
+    const parameter = {
+      bid: process.env.APP_BID,
+      pageNum: 0,
+      pageCount: 15,
+    }
+    if (query.fid) {
+      parameter.fid = query.fid
+    }
+    const [, , data] = await Promise.all([
       store.dispatch('GetUserInfo', process.env.APP_BID),
       store.dispatch('GetCategories', process.env.APP_BID),
+      app.$Api.article.getArticles(parameter),
     ])
+    return { articleList: data.result }
   },
   data() {
     return {
@@ -54,16 +63,38 @@ export default {
           tab: '文章(8)',
         },
       ],
+      articleList: {
+        pageNum: 0,
+        pageCount: 15,
+        list: [],
+        total: 0,
+      },
     }
-  },
-  computed: {
-    ...mapGetters(['nickName', 'avatar', 'userInfo', 'tags']),
   },
   methods: {
     handleTabChange(key, type) {
       this[type] = key
     },
     handleCategoryChange(fid) {},
+    async handleArticleMore() {
+      const param = {
+        bid: process.env.APP_BID,
+        pageNum: this.articleList.pageNum,
+        pageCount: this.articleList.pageCount,
+      }
+      try {
+        const data = await this.$App.article.getArticles(param)
+        if (data.head && data.head.respCode === 200) {
+          this.articleList.pageNum = data.result.pageNum + 1
+          this.articleList.total = data.result.total
+          this.articleList.list.push(this.articleList.list, data.result.list)
+        } else {
+          this.$message.error(data.head.respMsg)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
   },
 }
 </script>

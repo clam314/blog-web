@@ -12,6 +12,7 @@ export default function (ctx) {
   })
 
   $axios.onResponse((res) => {
+    console.log('onResponse', res.data)
     return res
   })
 }

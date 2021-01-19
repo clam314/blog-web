@@ -86,7 +86,13 @@ export default {
   },
   methods: {
     onCategoryItemClick(item) {
-      console.log(item)
+      console.log('onCategoryItemClick', item)
+      this.$router.push({
+        path: '/article',
+        query: {
+          fid: item,
+        },
+      })
     },
   },
 }

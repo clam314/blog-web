@@ -44,6 +44,7 @@ export default {
       pageNum: 0,
       pageCount: 5,
     }
+    console.log('article-asyncData: ', query.fid)
     if (query.fid) {
       parameter.fid = query.fid
     }
@@ -54,7 +55,7 @@ export default {
     ])
     if (data.head && data.head.respCode === 200) {
       data.result.pageNum = data.result.pageNum + 1
-      data.selectedCategory = query.fid || ''
+      data.result.selectedCategory = query.fid || ''
       return { articleList: data.result }
     }
   },
@@ -91,6 +92,12 @@ export default {
     },
     handleCategoryChange(fid) {
       this.$refs.articles.refreshData(fid)
+      // this.$router.push({
+      //   path: '/article',
+      //   query: {
+      //     fid,
+      //   },
+      // })
     },
   },
 }

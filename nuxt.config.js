@@ -1,4 +1,6 @@
 export default {
+  mode: 'universal',
+  ssr: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'blog-web',
@@ -32,7 +34,7 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/dotenv'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/dotenv', 'cookie-universal-nuxt'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
@@ -44,6 +46,17 @@ export default {
         },
       },
     },
+    // 修改打包成单独的CSS文件引入
+    extractCSS: {
+      // allChunks: true,
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: true,
+    },
+  },
+  server: {
+    port: 8000,
+    host: '192.168.50.88',
   },
   axios: {
     proxy: true,
@@ -51,9 +64,9 @@ export default {
 
   proxy: {
     '/blog': {
-      target: 'http://0.0.0.0:4000/api',
+      // target: 'http://0.0.0.0:4000/api',
       // target: 'http://192.168.50.13:4000/api',
-      // target: 'http://106.52.118.68:4000/api',
+      target: 'http://106.52.118.68:4321/api',
       changeOrigin: true,
     },
   },

@@ -80,11 +80,6 @@ export default {
     if (name) {
       this.selectedKeys = [name]
     }
-    // const match = matchMedia((result) => {
-    //   this.menusVisible = !result
-    // })
-    // match()
-    // window.onresize = match
     const _this = this
     window.onresize = function () {
       if (_this.drawerVisible) {
@@ -99,8 +94,11 @@ export default {
       this.$router.push(path || '/')
     },
     findMenuOrRouter(val, key, findKey) {
-      for (const m of this.menus) {
-        if (val === m[key]) {
+      // 倒叙，避免'/'匹配所有路径……
+      for (let i = this.menus.length - 1; i >= 0; i--) {
+        const m = this.menus[i]
+        const reg = RegExp(`^${m[key]}`)
+        if (reg.test(val)) {
           return m[findKey]
         }
       }

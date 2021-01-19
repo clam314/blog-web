@@ -27,7 +27,7 @@
         :updateAt="Number(item.publishedTime)"
       />
     </a-list-item>
-    <infinite-loading @infinite="infiniteHandler" />
+    <infinite-loading v-if="showInfinite" :identifier="infiniteId" @infinite="infiniteHandler" />
   </a-list>
 </template>
 
@@ -54,6 +54,8 @@ export default {
     return {
       loading: false,
       noMore: false,
+      infiniteId: +new Date(),
+      showInfinite: true,
     }
   },
   methods: {
@@ -72,6 +74,9 @@ export default {
         pageNum: this.articleList.pageNum,
         pageCount: this.articleList.pageCount,
       }
+      if (this.articleList.selectedCategory) {
+        param.fid = this.articleList.selectedCategory
+      }
       this.$Api.article
         .getArticles(param)
         .then((data) => {
@@ -87,14 +92,26 @@ export default {
           console.log('loaded')
           $state.loaded()
           if (this.noMore) {
-            console.log('noMore:', this.articleList.list.length)
             $state.complete()
+            if (this.articleList.list.length === 0) {
+              this.showInfinite = false
+            }
           }
         })
         .catch((e) => {
           console.log(e)
           $state.loaded()
         })
+    },
+    refreshData(fid) {
+      this.articleList.list = []
+      this.articleList.pageNum = 0
+      this.articleList.total = 0
+      this.articleList.selectedCategory = fid
+      this.noMore = false
+      this.showInfinite = true
+      this.infiniteId += 1
+      this.$emit('more', this.articleList)
     },
   },
 }

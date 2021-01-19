@@ -35,8 +35,8 @@ export default {
     this.selected = ['']
   },
   methods: {
-    onMenuClick() {
-      this.$emit('change', this.selected[0])
+    onMenuClick(item) {
+      this.$emit('change', item.key)
     },
     changeSelected(fid) {
       this.selected = [fid]

@@ -14,12 +14,12 @@
             :activeTabKey="noTitleKey"
             @tabChange="(key) => handleTabChange(key, 'noTitleKey')"
           >
-            <article-list v-model="articleList" />
+            <article-list ref="articles" v-model="articleList" />
           </a-card>
         </a-col>
         <a-col class="show-big-screen" :sm="24" :lg="6">
           <user-info />
-          <article-categories class="card-category" @change="handleCategoryChange" />
+          <article-categories ref="categories" class="card-category" @change="handleCategoryChange" />
         </a-col>
       </a-row>
       <back-top />
@@ -54,6 +54,7 @@ export default {
     ])
     if (data.head && data.head.respCode === 200) {
       data.result.pageNum = data.result.pageNum + 1
+      data.selectedCategory = query.fid || ''
       return { articleList: data.result }
     }
   },
@@ -65,6 +66,7 @@ export default {
         pageCount: 5,
         list: [],
         total: 0,
+        selectedCategory: '',
       },
     }
   },
@@ -78,11 +80,18 @@ export default {
       ]
     },
   },
+  mounted() {
+    if (this.$route.query.fid) {
+      this.$refs.categories.changeSelected(this.articleList.selectedCategory)
+    }
+  },
   methods: {
     handleTabChange(key, type) {
       this[type] = key
     },
-    handleCategoryChange(fid) {},
+    handleCategoryChange(fid) {
+      this.$refs.articles.refreshData(fid)
+    },
   },
 }
 </script>

@@ -73,6 +73,7 @@ export default {
         { name: '站点主页', type: 'smile', path: '/' },
         { name: '个人文章', type: 'read', path: '/article' },
       ],
+      hide: null,
     }
   },
   mounted() {
@@ -80,17 +81,29 @@ export default {
     if (name) {
       this.selectedKeys = [name]
     }
-    const _this = this
-    window.onresize = function () {
-      if (_this.drawerVisible) {
-        _this.drawerVisible = false
+    // hide 放在methods里面this的指向会有问题
+    this.hide = () => {
+      if (this.drawerVisible) {
+        this.drawerVisible = false
       }
     }
+    window.addEventListener('resize', this.hide)
+    window.addEventListener('scroll', this.hide)
+    console.log('AppLayout mounted')
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.hide)
+    window.removeEventListener('scroll', this.hide)
+    console.log('AppLayout beforeDestroy')
+  },
+  destroyed() {
+    console.log('AppLayout destroyed')
   },
   methods: {
     onMenuItemClick(item) {
       this.selectedKeys = [item.key]
       const path = this.findMenuOrRouter(item.key, 'name', 'path')
+      this.drawerVisible = false
       this.$router.push(path || '/')
     },
     findMenuOrRouter(val, key, findKey) {

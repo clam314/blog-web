@@ -2,14 +2,8 @@ import { createUUID } from '@/utils/utils'
 
 export const state = () => ({
   navs: [
-    {
-      name: '站点首页',
-      path: '/',
-    },
-    {
-      name: '个人文章',
-      path: '/article',
-    },
+    { name: '站点主页', type: 'smile', path: '/' },
+    { name: '个人文章', type: 'read', path: '/article' },
   ],
   uuid: '',
   token: '',

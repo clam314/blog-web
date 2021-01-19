@@ -25,19 +25,19 @@ export default {
     return {
       items: [
         {
-          time: '2021-2-20',
+          time: '20210220',
           description: 'v0.4beta版上线',
         },
         {
-          time: '2021-1-20',
+          time: '20210120',
           description: 'v0.3beta版本上线,主要进行功能完善及页面优化',
         },
         {
-          time: '2021-1-15',
+          time: '20210105',
           description: 'v0.2beta版本上线,包括基于Nuxt实现SSR的博客Web页面，以及后端相关接口',
         },
         {
-          time: '2020-12-1',
+          time: '20201201',
           description: 'v0.1beta版本上线，包括基于koa2的后台与基于antdv pro的管理系统Web页面',
         },
       ],
@@ -49,6 +49,7 @@ export default {
 <style lang="less" scoped>
 .timeline-wrapper {
   width: 100%;
+  min-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: center;

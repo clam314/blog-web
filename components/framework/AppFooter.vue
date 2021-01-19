@@ -3,17 +3,17 @@
     <a-descriptions title="" layout="vertical" size="small" style="font-size: 12px" :column="{ xs: 1, sm: 4 }">
       <a-descriptions-item label="后端地址">
         <template>
-          <a style="display: block">点击跳转</a>
+          <a style="display: block" target="view_window">点击跳转</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="项目地址">
         <template v-for="rep in repositories">
-          <a :key="rep.href" :href="rep.href" style="display: block">{{ rep.name }}</a>
+          <a :key="rep.href" :href="rep.href" target="view_window" style="display: block">{{ rep.name }}</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="友情链接">
         <template v-for="link in links">
-          <a :key="link.href" :href="link.href" style="display: block">{{ link.name }}</a>
+          <a :key="link.href" :href="link.href" target="view_window" style="display: block">{{ link.name }}</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="联系我">

@@ -69,12 +69,13 @@ export default {
       drawerVisible: false,
       menusVisible: true,
       selectedKeys: [],
-      menus: [
-        { name: '站点主页', type: 'smile', path: '/' },
-        { name: '个人文章', type: 'read', path: '/article' },
-      ],
       hide: null,
     }
+  },
+  computed: {
+    menus() {
+      return this.$store.getters.navs
+    },
   },
   mounted() {
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')

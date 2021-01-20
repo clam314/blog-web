@@ -1,12 +1,12 @@
 <template>
   <div class="antd-pro-components-article-list-content-index-listContent">
-    <div class="description">
+    <div class="description" style="word-wrap: break-word">
       <slot>
         {{ description }}
       </slot>
     </div>
     <div class="extra">
-      <a-avatar :src="avatar" size="small" />
+      <img class="avatar" :src="avatar" :onerror="defaultAvatar" />
       <span class="owner">{{ owner }}</span> 发布在 <span class="category">{{ category }}</span>
       <em>{{ updateAt | dayjs }}</em>
     </div>
@@ -37,6 +37,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    defaultAvatar() {
+      return `this.src="${require('@/assets/image/avatar.jpg')}"`
+    },
+  },
 }
 </script>
 
@@ -53,13 +58,15 @@ export default {
     color: @text-color-secondary;
     line-height: 22px;
 
-    & /deep/ .ant-avatar {
+    & .avatar {
       position: relative;
       top: 1px;
       width: 20px;
       height: 20px;
       margin-right: 8px;
       vertical-align: top;
+      border-radius: 50%;
+      overflow: hidden;
     }
 
     & .owner,

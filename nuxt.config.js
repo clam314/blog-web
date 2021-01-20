@@ -56,8 +56,8 @@ export default {
   },
   server: {
     port: 8000,
-    // host: '192.168.50.88',
-    host: '192.168.0.100',
+    host: '192.168.50.88',
+    // host: '192.168.0.100',
   },
   axios: {
     proxy: true,
@@ -65,9 +65,9 @@ export default {
 
   proxy: {
     '/blog': {
-      target: 'http://0.0.0.0:4000/api',
+      // target: 'http://0.0.0.0:4000/api',
       // target: 'http://192.168.50.13:4000/api',
-      // target: 'http://106.52.118.68:4321/api',
+      target: 'http://106.52.118.68:4321/api',
       changeOrigin: true,
     },
   },

@@ -60,7 +60,7 @@ export const actions = {
       app.$cookies.set('uuid', uuid, { path: '/', maxAge: 60 * 60 * 24 * 30 * 12 * 10 })
       commit('setUUID', uuid)
     }
-    await dispatch('GetLinks')
+    await Promise.all([dispatch('GetLinks'), dispatch('GetUserInfo', process.env.APP_BID)])
   },
 
   async GetUserInfo({ commit }, bid) {

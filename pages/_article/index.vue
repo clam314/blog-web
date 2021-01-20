@@ -48,8 +48,7 @@ export default {
     if (query.fid) {
       parameter.fid = query.fid
     }
-    const [, , data] = await Promise.all([
-      store.dispatch('GetUserInfo', process.env.APP_BID),
+    const [, data] = await Promise.all([
       store.dispatch('GetCategories', process.env.APP_BID),
       app.$Api.article.getArticles(parameter),
     ])

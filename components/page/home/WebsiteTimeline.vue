@@ -47,14 +47,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/config.less';
 .timeline-wrapper {
   width: 100%;
+  max-width: @app-max-content-width;
   min-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
 }
 
 @title-color: #333333;

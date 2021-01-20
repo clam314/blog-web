@@ -63,6 +63,11 @@ export default {
   &-3 {
     width: 100%;
     min-height: calc(100vh - @app-header-height);
+    background-color: white;
+    padding: 20px 0;
+    @media only screen and (max-width: @app-max-width) {
+      padding: 0;
+    }
   }
 
   &-1::before,

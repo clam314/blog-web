@@ -1,3 +1,4 @@
+require('dotenv').config()
 export default {
   mode: 'universal',
   ssr: true,
@@ -54,6 +55,9 @@ export default {
       ignoreOrder: true,
     },
   },
+  env: {
+    appBaseUrl: process.env.APP_BASE_URL,
+  },
   server: {
     port: 8000,
     host: '192.168.50.88',
@@ -67,7 +71,7 @@ export default {
     '/blog': {
       // target: 'http://0.0.0.0:4000/api',
       // target: 'http://192.168.50.13:4000/api',
-      target: 'http://106.52.118.68:4321/api',
+      target: process.env.APP_BASE_URL,
       changeOrigin: true,
     },
   },

@@ -39,6 +39,7 @@
 import UserInfo from '@/components/page/article/UserInfo'
 import ArticleCategories from '@/components/page/article/ArticleCategories'
 import BackTop from '@/components/basic/BackTop'
+import { gerRandomImage } from '@/utils/utils'
 
 export default {
   components: {
@@ -63,7 +64,7 @@ export default {
       if (this.article && this.article.des_image) {
         return this.article.des_image
       } else {
-        return 'https://acg.yanwz.cn/wallpaper/api.php'
+        return gerRandomImage()
       }
     },
   },

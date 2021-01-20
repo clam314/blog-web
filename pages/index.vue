@@ -1,20 +1,32 @@
 <template>
   <div class="container">
-    <div class="container-1">网站介绍</div>
+    <div class="container-1" :style="{ backgroundImage: `url(${background1})` }">网站介绍</div>
     <div class="container-3" style="min-height: 500px">占位</div>
-    <div class="container-2">自我介绍</div>
+    <div class="container-2" :style="{ backgroundImage: `url(${background2})` }">自我介绍</div>
     <div class="container-3">
       <website-timeline />
     </div>
-    <div class="container-4">网站运行时间</div>
+    <div class="container-4" :style="{ backgroundImage: `url(${background3})` }">网站运行时间</div>
   </div>
 </template>
 
 <script>
 import WebsiteTimeline from '@/components/page/home/WebsiteTimeline'
+import { gerRandomImage } from '@/utils/utils'
 export default {
   components: {
     WebsiteTimeline,
+  },
+  computed: {
+    background1() {
+      return gerRandomImage()
+    },
+    background2() {
+      return gerRandomImage()
+    },
+    background3() {
+      return gerRandomImage()
+    },
   },
 }
 </script>
@@ -29,9 +41,7 @@ export default {
   &-1 {
     width: 100%;
     min-height: calc(100vh - @app-header-height);
-
     position: relative;
-    background-image: url(https://acg.toubiec.cn/random.php);
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -42,9 +52,7 @@ export default {
     min-height: calc(100vh - @app-header-height);
     display: flex;
     justify-content: center;
-
     position: relative;
-    background-image: url(https://api.ixiaowai.cn/mcapi/mcapi.php);
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -53,9 +61,7 @@ export default {
   &-4 {
     width: 100%;
     min-height: calc(100vh - @app-header-height);
-
     position: relative;
-    background-image: url(https://api.ixiaowai.cn/api/api.php);
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;

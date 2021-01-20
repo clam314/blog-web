@@ -1,5 +1,3 @@
-import { trim } from 'core-js'
-
 const $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 const currentTimeString = () => {
@@ -46,24 +44,21 @@ export const createUUID = () => {
 }
 
 /**
- * 将cookie转成json对象
+ * 是否支持webp图片
+ * @returns {boolean}
  */
-export const cookieParse = (cookie) => {
-  if (!cookie) {
-    return {}
+export const isSupportWebp = () => {
+  try {
+    return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0
+  } catch (err) {
+    return false
   }
-  const arr = cookie.split(';')
-  const obj = {}
-  arr.forEach((item) => {
-    const temp = item.split('=')
-    const key = trim(temp[0])
-    let value = trim(temp[1])
-    value = unescape(value)
-    try {
-      value = JSON.parse(value)
-    } catch {}
+}
 
-    obj[key] = value
-  })
-  return obj
+/**
+ * 获取后端随机图地址
+ * @returns {string}
+ */
+export const gerRandomImage = (num = new Date().getTime()) => {
+  return `${process.env.APP_BASE_URL}/blog/random?img=${isSupportWebp() ? 'webp' : 'img'}&num=${num}`
 }

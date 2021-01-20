@@ -2,18 +2,18 @@
   <div class="app-footer-wrapper">
     <a-descriptions title="" layout="vertical" size="small" style="font-size: 12px" :column="{ xs: 1, sm: 4 }">
       <a-descriptions-item label="后端地址">
-        <template>
-          <a style="display: block" target="view_window">点击跳转</a>
+        <template v-for="(be, index) in backend">
+          <a :key="index" :href="be.link" target="view_window" style="display: block">{{ be.title }}</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="项目地址">
-        <template v-for="rep in repositories">
-          <a :key="rep.href" :href="rep.href" target="view_window" style="display: block">{{ rep.name }}</a>
+        <template v-for="(rep, index) in repositories">
+          <a :key="index" :href="rep.link" target="view_window" style="display: block">{{ rep.title }}</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="友情链接">
-        <template v-for="link in links">
-          <a :key="link.href" :href="link.href" target="view_window" style="display: block">{{ link.name }}</a>
+        <template v-for="(link, index) in links">
+          <a :key="index" :href="link.link" target="view_window" style="display: block">{{ link.title }}</a>
         </template>
       </a-descriptions-item>
       <a-descriptions-item label="联系我">
@@ -33,20 +33,24 @@
 <script>
 export default {
   name: 'AppFooter',
-  data() {
-    return {
-      descriptions: '90后\n靠着兴趣自学成为一名全粘工程师\n做过Android，写过Python\n如今快快乐乐的做着web前端',
-      repositories: [
-        { name: '博客web端', href: 'https://github.com/clam314/blog-web' },
-        { name: '管理系统web端', href: 'https://github.com/clam314/blog-admin-web' },
-        { name: '管理系统后台', href: 'https://github.com/clam314/blog-admin-api' },
-      ],
-      links: [{ name: 'github', href: 'https://github.com/clam314' }],
-    }
-  },
   computed: {
     email() {
       return this.$store.state.userInfo.email
+    },
+    backend() {
+      return this.$store.state.links.filter((item) => {
+        return item.type === 'backend'
+      })
+    },
+    links() {
+      return this.$store.state.links.filter((item) => {
+        return item.type === 'link'
+      })
+    },
+    repositories() {
+      return this.$store.state.links.filter((item) => {
+        return item.type === 'repositories'
+      })
     },
     copyright() {
       const year = new Date().getFullYear()

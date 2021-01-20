@@ -12,22 +12,18 @@ export const state = () => ({
   nickName: '',
   tags: [],
   categories: [],
+  links: [],
 })
 
 export const getters = {
   navs: (state) => state.navs,
-
   uuid: (state) => state.uuid,
-
   userInfo: (state) => state.userInfo,
-
   avatar: (state) => state.avatar,
-
   nickName: (state) => state.nickName,
-
   tags: (state) => state.tags,
-
   categories: (state) => state.categories,
+  links: (state) => state.links,
 }
 
 export const mutations = {
@@ -49,10 +45,13 @@ export const mutations = {
   setUUID(state, uuid) {
     state.uuid = uuid
   },
+  setLinks(state, links) {
+    state.links = links
+  },
 }
 
 export const actions = {
-  nuxtServerInit({ commit }, { app }) {
+  async nuxtServerInit({ commit, dispatch }, { app }) {
     let uuid = app.$cookies.get('uuid')
     if (uuid) {
       commit('setUUID', uuid)
@@ -61,6 +60,7 @@ export const actions = {
       app.$cookies.set('uuid', uuid, { path: '/', maxAge: 60 * 60 * 24 * 30 * 12 * 10 })
       commit('setUUID', uuid)
     }
+    await dispatch('GetLinks')
   },
 
   async GetUserInfo({ commit }, bid) {
@@ -80,6 +80,15 @@ export const actions = {
     const res = await this.$Api.article.getCategories({ bid })
     if (res.head && res.head.respCode === 200) {
       commit('setCategories', [{ name: '全部', fid: '' }, ...res.result])
+    } else {
+      console.log(res.head.respMsg)
+    }
+  },
+
+  async GetLinks({ commit }, bid) {
+    const res = await this.$Api.myApp.getLinks({ bid })
+    if (res.head && res.head.respCode === 200) {
+      commit('setLinks', res.result)
     } else {
       console.log(res.head.respMsg)
     }

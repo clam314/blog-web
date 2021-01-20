@@ -3,7 +3,7 @@ export default {
   ssr: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'blog-web',
+    title: '前端实验室',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -56,7 +56,8 @@ export default {
   },
   server: {
     port: 8000,
-    host: '192.168.50.88',
+    // host: '192.168.50.88',
+    host: '192.168.0.100',
   },
   axios: {
     proxy: true,

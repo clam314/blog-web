@@ -31,7 +31,7 @@ export default {
   }
 
   @media only screen and (max-width: @screen-md) {
-    right: 10px !important;
+    right: 20px !important;
   }
 }
 </style>

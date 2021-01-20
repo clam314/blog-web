@@ -68,19 +68,6 @@ export default {
       }
     },
   },
-  beforeMount() {
-    const linkMd = document.createElement('link')
-    linkMd.rel = 'stylesheet'
-    linkMd.href = 'https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css'
-    const linkHeightLight = document.createElement('link')
-    linkHeightLight.rel = 'stylesheet'
-    linkHeightLight.href = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/paraiso-dark.min.css'
-    const scriptHeightLight = document.createElement('script')
-    scriptHeightLight.src = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js'
-    document.head.appendChild(linkMd)
-    document.head.appendChild(linkHeightLight)
-    document.head.appendChild(scriptHeightLight)
-  },
   mounted() {
     this.$refs.categories.changeSelected(this.article.fid)
   },
@@ -94,6 +81,26 @@ export default {
         },
       })
     },
+  },
+  head() {
+    return {
+      title: this.article.title || '前端实验室',
+      meta: [
+        { hid: 'description', name: 'description', content: this.article.description },
+        { hid: 'keywords', name: 'keywords', content: this.article.tags.toString() },
+      ],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css',
+        },
+        {
+          rel: 'stylesheet',
+          href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/paraiso-dark.min.css',
+        },
+      ],
+      script: [{ src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js' }],
+    }
   },
 }
 </script>
@@ -132,6 +139,7 @@ export default {
       .article-info {
         height: 100%;
         width: 100%;
+        border-radius: 5px;
         position: relative;
         top: 0;
         left: 0;

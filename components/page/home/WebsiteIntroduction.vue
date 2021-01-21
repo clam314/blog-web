@@ -1,34 +1,22 @@
 <template>
   <div class="introduction-wrapper">
     <a-row class="introduction-container" :gutter="{ xs: 20, sm: 10, md: 12, lg: 20, xl: 30 }">
-      <a-col :xs="24" :sm="12">
-        <div class="wrapper-background" :style="{ backgroundImage: `url(${background1})` }">
-          <div class="wrapper-filter">
-            <div class="card">
-              <h2 class="card-title">{{ card[0].title }}</h2>
-              <p class="card-description">{{ card[0].description }}</p>
-              <a class="card-link" :href="card[0].href">
-                <span>{{ card[0].link }}</span>
-                <a-icon type="right" />
-              </a>
+      <template v-for="(card, index) in cards">
+        <a-col :key="index" :xs="24" :sm="12">
+          <div class="wrapper-background" :style="{ backgroundImage: `url(${getBackground()})` }">
+            <div class="wrapper-filter">
+              <div class="card">
+                <h2 class="card-title">{{ card.title }}</h2>
+                <p class="card-description">{{ card.description }}</p>
+                <a class="card-link" :href="card.href">
+                  <span>{{ card.link }}</span>
+                  <a-icon type="right" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </a-col>
-      <a-col :xs="24" :sm="12">
-        <div class="wrapper-background" :style="{ backgroundImage: `url(${background2})` }">
-          <div class="wrapper-filter">
-            <div class="card">
-              <h2 class="card-title">{{ card[1].title }}</h2>
-              <p class="card-description">{{ card[1].description }}</p>
-              <a class="card-link">
-                <span>{{ card[1].link }}</span>
-                <a-icon type="right" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </a-col>
+        </a-col>
+      </template>
     </a-row>
   </div>
 </template>
@@ -40,7 +28,7 @@ export default {
   name: 'WebsiteIntroduction',
   data() {
     return {
-      card: [
+      cards: [
         {
           title: '关于本站',
           description: '本站是个人练手搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等',
@@ -56,11 +44,8 @@ export default {
       ],
     }
   },
-  computed: {
-    background1() {
-      return gerRandomImage()
-    },
-    background2() {
+  methods: {
+    getBackground() {
       return gerRandomImage()
     },
   },

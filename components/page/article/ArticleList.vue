@@ -18,7 +18,7 @@
           </template>
         </template>
       </a-list-item-meta>
-      <img v-if="item.des_image !== ''" slot="extra" class="article-img" alt="logo" :src="item.des_image" />
+      <img slot="extra" class="article-img" alt="logo" :src="getImage(item)" />
       <article-list-content
         :description="item.description"
         :owner="item.user.name"
@@ -34,7 +34,7 @@
 <script>
 import ArticleListContent from '@/components/page/article/ArticleListContent'
 import IconText from '@/components/basic/IconText'
-
+import { gerRandomImage } from '@/utils/utils'
 export default {
   components: {
     IconText,
@@ -59,6 +59,13 @@ export default {
     }
   },
   methods: {
+    getImage(article) {
+      if (article.des_image) {
+        return article.des_image
+      } else {
+        return gerRandomImage()
+      }
+    },
     handleTitleClick(tid) {
       this.$router.push({
         path: 'article/details',

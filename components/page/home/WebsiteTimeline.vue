@@ -56,7 +56,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
+  padding: 20px 20px 0;
   margin: 0 auto;
   background-color: #f2f2f2;
 }

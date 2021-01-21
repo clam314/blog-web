@@ -60,8 +60,8 @@ export default {
   },
   server: {
     port: 8000,
-    host: '192.168.50.88',
-    // host: '192.168.0.100',
+    // host: '192.168.50.88',
+    host: '127.0.0.1',
   },
   axios: {
     proxy: true,

@@ -48,17 +48,13 @@ export const createUUID = () => {
  * @returns {boolean}
  */
 export const isSupportWebp = () => {
-  try {
-    return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0
-  } catch (err) {
-    return false
-  }
+  return !![].map && document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0
 }
 
 /**
  * 获取后端随机图地址
  * @returns {string}
  */
-export const gerRandomImage = (num = new Date().getTime()) => {
-  return `${process.env.APP_BASE_URL}/blog/random?img=${isSupportWebp() ? 'webp' : 'img'}&num=${num}`
+export const gerRandomImage = (num = Math.random()) => {
+  return `${process.env.APP_BASE_URL}/blog/random?img=${'webp'}&num=${num}`
 }

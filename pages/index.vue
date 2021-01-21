@@ -46,14 +46,12 @@ export default {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
-    z-index: 0;
     @media only screen and (max-height: 740px) {
       min-height: 740px;
     }
 
     &-content {
       min-height: calc(100vh - @app-header-height);
-      z-index: 1;
       content: '';
       backdrop-filter: saturate(180%) blur(10px);
       position: absolute;
@@ -62,10 +60,6 @@ export default {
       right: 0;
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.7);
-      // 修复Chrome闪烁问题
-      -webkit-transform: translateZ(0);
-      -webkit-backface-visibility: hidden;
-      -webkit-perspective: 1000px;
       @media only screen and (max-height: 740px) {
         min-height: 740px;
       }

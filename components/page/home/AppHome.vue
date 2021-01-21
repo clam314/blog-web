@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :class="{ 'home-show-background': showBackground }">
     <div class="home-wrapper">
       <a-row>
         <a-col class="home-title" :xs="24">
@@ -13,7 +13,7 @@
             <p class="home-body-container-text-description">
               在这里，你可以看到我的一些技术文章和网络日志，中间可能还夹杂着自己的一些随笔杂文。
             </p>
-            <span class="home-body-container-text-hope">希望这些闲言碎语，能对你有所帮助！</span>
+            <span class="home-body-container-text-hope">希望这些闲言碎语，也可能对你有所帮助！</span>
           </div>
         </a-col>
         <a-col :xs="24" :sm="12">
@@ -23,6 +23,10 @@
         </a-col>
         <a-col :xs="24">
           <div class="home-link-wrapper">
+            <a class="home-link" style="margin-right: 30px">
+              <span @click="handleShowBackground">戳一戳</span>
+              <a-icon type="right" />
+            </a>
             <a class="home-link">
               <span @click="handleLinkClick">逛一逛</span>
               <a-icon type="right" />
@@ -37,16 +41,38 @@
 <script>
 export default {
   name: 'AppHome',
+  data() {
+    return {
+      showBackground: false,
+      resetBackground: null,
+    }
+  },
   computed: {
     avatar() {
       return this.$store.getters.avatar
     },
+  },
+  mounted() {
+    this.resetBackground = () => {
+      if (this.showBackground) {
+        this.showBackground = false
+      }
+    }
+    window.addEventListener('resize', this.resetBackground)
+    window.addEventListener('scroll', this.resetBackground)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resetBackground)
+    window.removeEventListener('scroll', this.resetBackground)
   },
   methods: {
     handleLinkClick() {
       this.$router.push({
         path: '/article',
       })
+    },
+    handleShowBackground() {
+      this.showBackground = true
     },
   },
 }
@@ -60,6 +86,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateY(0);
+  transition: transform 1s @ease-in-circ;
+
+  &-show-background {
+    transform: translateY(-130vh);
+    transition: transform 1s @ease-out-circ;
+  }
 
   &-wrapper {
     max-width: 960px;

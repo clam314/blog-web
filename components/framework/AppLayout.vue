@@ -43,25 +43,6 @@ import AppFooter from '@/components/framework/AppFooter'
 import DrawerMenu from '~/components/framework/DrawerMenu'
 import AppMenu from '~/components/framework/AppMenu'
 
-// 单位px
-// const media = [
-//   {
-//     xs: 1,
-//     sm: 576,
-//     md: 768,
-//     lg: 992,
-//     xl: 1200,
-//     xxl: 1600,
-//   },
-// ]
-
-// function matchMedia(callback, width = 576) {
-//   return () => {
-//     const result = window.matchMedia(`(max-width: ${width}px)`).matches
-//     callback(result)
-//   }
-// }
-
 export default {
   components: { AppFooter, AppMenu, DrawerMenu, MenuIconOmit },
   data() {
@@ -90,15 +71,10 @@ export default {
     }
     window.addEventListener('resize', this.hide)
     window.addEventListener('scroll', this.hide)
-    console.log('AppLayout mounted')
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.hide)
     window.removeEventListener('scroll', this.hide)
-    console.log('AppLayout beforeDestroy')
-  },
-  destroyed() {
-    console.log('AppLayout destroyed')
   },
   methods: {
     onMenuItemClick(item) {

@@ -3,12 +3,30 @@
     <a-row class="introduction-container" :gutter="{ xs: 20, sm: 10, md: 12, lg: 20, xl: 30 }">
       <a-col :xs="24" :sm="12">
         <div class="wrapper-background" :style="{ backgroundImage: `url(${background1})` }">
-          <div class="wrapper-filter">内容</div>
+          <div class="wrapper-filter">
+            <div class="card">
+              <h2 class="card-title">{{ card[0].title }}</h2>
+              <p class="card-description">{{ card[0].description }}</p>
+              <a class="card-link" :href="card[0].href">
+                <span>{{ card[0].link }}</span>
+                <a-icon type="right" />
+              </a>
+            </div>
+          </div>
         </div>
       </a-col>
       <a-col :xs="24" :sm="12">
         <div class="wrapper-background" :style="{ backgroundImage: `url(${background2})` }">
-          <div class="wrapper-filter">内容</div>
+          <div class="wrapper-filter">
+            <div class="card">
+              <h2 class="card-title">{{ card[1].title }}</h2>
+              <p class="card-description">{{ card[1].description }}</p>
+              <a class="card-link">
+                <span>{{ card[1].link }}</span>
+                <a-icon type="right" />
+              </a>
+            </div>
+          </div>
         </div>
       </a-col>
     </a-row>
@@ -20,6 +38,24 @@ import { gerRandomImage } from '@/utils/utils'
 
 export default {
   name: 'WebsiteIntroduction',
+  data() {
+    return {
+      card: [
+        {
+          title: '关于本站',
+          description: '本站是个人练手搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等',
+          link: '欢迎前往项目Issues和Star',
+          href: '#app-footer',
+        },
+        {
+          title: '关于我',
+          description: '一枚90后，做过Android，写过Python，现在是一名前端工程师，并渐渐靠拢全栈',
+          link: 'GitHub',
+          href: 'https://github.com/clam314',
+        },
+      ],
+    }
+  },
   computed: {
     background1() {
       return gerRandomImage()
@@ -52,6 +88,12 @@ export default {
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
+      @media only screen and (max-width: @screen-lg) {
+        height: 500px;
+      }
+      @media only screen and (max-width: @screen-md) {
+        height: 400px;
+      }
     }
     .wrapper-filter {
       height: 100%;
@@ -59,12 +101,49 @@ export default {
       position: relative;
       top: 0;
       left: 0;
+      overflow: hidden;
+      backdrop-filter: saturate(90%) blur(5px);
+      background-color: rgba(0, 0, 0, 0.5);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      backdrop-filter: saturate(180%) blur(30px);
-      background-color: rgba(0, 0, 0, 0.3);
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        &-title {
+          font-size: 36px;
+          font-weight: 600;
+          color: white;
+          margin-bottom: 0;
+        }
+        &-description {
+          max-width: 400px;
+          margin-top: 0.8em;
+          margin-bottom: 0;
+          line-height: 1.5;
+          font-size: 17px;
+          font-weight: 400;
+          color: #f5f5f7;
+          text-align: center;
+        }
+        &-link {
+          margin-top: 0.8em;
+          color: #06e;
+
+          > span {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.5;
+          }
+          span:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 }

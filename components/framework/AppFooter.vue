@@ -1,5 +1,5 @@
 <template>
-  <div class="app-footer-wrapper">
+  <div id="app-footer" class="app-footer-wrapper">
     <a-descriptions title="" layout="vertical" size="small" style="font-size: 12px" :column="{ xs: 1, sm: 4 }">
       <a-descriptions-item label="后端地址">
         <template v-for="(be, index) in backend">

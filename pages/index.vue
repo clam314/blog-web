@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="container-1" :style="{ backgroundImage: `url(${background1})` }">1网站介绍</div>
-    <div></div>
     <div class="container-introduction">
       <website-introduction />
     </div>
@@ -61,7 +60,6 @@ export default {
   }
   &-introduction {
     width: 100%;
-    //min-height: calc(100vh - @app-header-height);
     background-color: @app-footer-background-color;
     padding: 30px 10px;
 
@@ -71,7 +69,7 @@ export default {
     @media only screen and (max-width: @screen-lg) {
       padding: 12px 10px;
     }
-    @media only screen and (max-width: @screen-sm) {
+    @media only screen and (max-width: @screen-xs-max) {
       padding: 0 0;
     }
   }
@@ -81,7 +79,7 @@ export default {
     min-height: calc(60vh - @app-header-height);
     background-color: @app-footer-background-color;
     padding: 0 10px;
-    @media only screen and (max-width: @screen-sm) {
+    @media only screen and (max-width: @screen-xs-max) {
       padding: 0;
     }
   }

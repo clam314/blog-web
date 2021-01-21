@@ -8,7 +8,7 @@
               <div class="card">
                 <h2 class="card-title">{{ card.title }}</h2>
                 <p class="card-description">{{ card.description }}</p>
-                <a class="card-link" :href="card.href">
+                <a class="card-link" :href="card.href" :target="index !== 0 ? 'view_window' : '_self'">
                   <span>{{ card.link }}</span>
                   <a-icon type="right" />
                 </a>
@@ -31,7 +31,7 @@ export default {
       cards: [
         {
           title: '关于本站',
-          description: '本站是个人练手搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等',
+          description: '本站是个人练手搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等等',
           link: '欢迎前往项目Issues和Star',
           href: '#app-footer',
         },

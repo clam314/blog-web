@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="container-1" :style="{ backgroundImage: `url(${background1})` }">1网站介绍</div>
+    <div class="container-1" :style="{ backgroundImage: `url(${background1})` }">
+      <app-home class="container-1-content" />
+    </div>
     <div class="container-introduction">
       <website-introduction />
     </div>
@@ -13,11 +15,13 @@
 <script>
 import WebsiteTimeline from '@/components/page/home/WebsiteTimeline'
 import WebsiteIntroduction from '@/components/page/home/WebsiteIntroduction'
+import AppHome from '@/components/page/home/AppHome'
 import { gerRandomImage } from '@/utils/utils'
 export default {
   components: {
     WebsiteTimeline,
     WebsiteIntroduction,
+    AppHome,
   },
   computed: {
     background1() {
@@ -42,10 +46,16 @@ export default {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+    z-index: 0;
+    @media only screen and (max-height: 740px) {
+      min-height: 740px;
+    }
 
-    &::before {
+    &-content {
+      min-height: calc(100vh - @app-header-height);
+      z-index: 1;
       content: '';
-      backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(10px);
       position: absolute;
       top: 0;
       left: 0;
@@ -56,6 +66,9 @@ export default {
       -webkit-transform: translateZ(0);
       -webkit-backface-visibility: hidden;
       -webkit-perspective: 1000px;
+      @media only screen and (max-height: 740px) {
+        min-height: 740px;
+      }
     }
   }
   &-introduction {

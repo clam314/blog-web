@@ -31,7 +31,8 @@ export default {
       cards: [
         {
           title: '关于本站',
-          description: '本站是个人练手搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等等',
+          description:
+            '本站是个人练手从零搭建，技能点包括Vue、Nuxt、Koa2、mongoDB的应用，以及Nginx代理，Docker部署等等',
           link: '欢迎前往项目Issues和Star',
           href: '#app-footer',
         },

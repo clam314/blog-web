@@ -44,7 +44,6 @@ export default {
       pageNum: 0,
       pageCount: 5,
     }
-    console.log('article-asyncData: ', query.fid)
     if (query.fid) {
       parameter.fid = query.fid
     }
@@ -91,12 +90,6 @@ export default {
     },
     handleCategoryChange(fid) {
       this.$refs.articles.refreshData(fid)
-      // this.$router.push({
-      //   path: '/article',
-      //   query: {
-      //     fid,
-      //   },
-      // })
     },
   },
 }

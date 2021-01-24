@@ -60,6 +60,7 @@ export default {
   },
   mounted() {
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
+    console.log('mounted ', name)
     if (name) {
       this.selectedKeys = [name]
     }

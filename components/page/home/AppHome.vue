@@ -23,14 +23,14 @@
         </a-col>
         <a-col :xs="24">
           <div class="home-link-wrapper">
-            <a class="home-link" style="margin-right: 30px">
+            <a class="home-link">
               <span @click="handleShowBackground">戳一戳</span>
               <a-icon type="right" />
             </a>
-            <a class="home-link">
-              <span @click="handleLinkClick">逛一逛</span>
-              <a-icon type="right" />
-            </a>
+            <!--            <a class="home-link">-->
+            <!--              <span @click="handleLinkClick">逛一逛</span>-->
+            <!--              <a-icon type="right" />-->
+            <!--            </a>-->
           </div>
         </a-col>
       </a-row>
@@ -87,11 +87,11 @@ export default {
   justify-content: center;
   align-items: center;
   transform: translateY(0);
-  transition: transform 1s @ease-in-circ;
+  transition: transform 1s @ease-out-circ;
 
   &-show-background {
-    transform: translateY(-130vh);
-    transition: transform 1s @ease-out-circ;
+    transform: translateY(-105vh);
+    transition: transform 1s @ease-in-circ;
   }
 
   &-wrapper {

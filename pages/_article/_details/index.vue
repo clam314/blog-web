@@ -21,7 +21,10 @@
               </div>
             </div>
             <!--            eslint-disable-next-line-->
-            <div class="markdown-body"  v-html="article.contentHtml" />
+            <div class="markdown-body"  v-html="article.publishedContent" />
+            <div class="card-footer">
+              <a-button type="primary" shape="circle" icon="like" size="large" @click="handleLike" />
+            </div>
           </a-card>
         </a-col>
         <!--        根据屏幕大小显示不同地方的个人信息-->
@@ -80,6 +83,16 @@ export default {
           fid: item,
         },
       })
+    },
+    handleLike() {
+      if (this.article && this.article.tid) {
+        this.$Api.article.likeArticle({ bid: process.env.APP_BID, tid: this.article.tid }).then((res) => {
+          if (res.head.respCode === 200) {
+            this.article.like = this.article.like + 1
+            this.$message.success('感谢点赞~', 3)
+          }
+        })
+      }
     },
   },
   head() {
@@ -197,6 +210,25 @@ export default {
 
   /deep/ .markdown-body pre {
     padding: 0;
+  }
+
+  .card-footer {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > button {
+      margin-top: 24px;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+    }
+
+    /deep/ .anticon {
+      vertical-align: -0.12em;
+    }
   }
 
   @media only screen and (max-width: @screen-md) {

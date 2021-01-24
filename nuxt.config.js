@@ -59,7 +59,7 @@ export default {
     appBaseUrl: process.env.APP_BASE_URL,
   },
   server: {
-    port: 8000,
+    port: 5000,
     // host: '192.168.50.88',
     host: '127.0.0.1',
   },

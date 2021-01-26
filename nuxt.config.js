@@ -63,7 +63,7 @@ const config = {
   },
   axios: {
     // 线上采用nginx作为代理，需要关闭
-    proxy: process.env.NODE_ENV === 'development',
+    proxy: true,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },

@@ -1,6 +1,6 @@
 require('dotenv').config()
-export default {
-  mode: 'universal',
+
+const config = {
   ssr: true,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -63,7 +63,7 @@ export default {
   },
   axios: {
     // 线上采用nginx作为代理，需要关闭
-    proxy: process.env.NODE_ENV !== 'production',
+    proxy: process.env.NODE_ENV === 'development',
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },
@@ -75,3 +75,6 @@ export default {
     },
   },
 }
+console.log('NODE_ENV: ', process.env.NODE_ENV)
+
+export default config

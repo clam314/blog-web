@@ -56,5 +56,5 @@ export const isSupportWebp = () => {
  * @returns {string}
  */
 export const gerRandomImage = (num = Math.random()) => {
-  return `${process.env.APP_BASE_URL}/blog/random?img=${'webp'}&num=${num}`
+  return `${process.env.APP_BASE_URL}/api/blog/random?img=${'webp'}&num=${num}`
 }

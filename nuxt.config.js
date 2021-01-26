@@ -59,18 +59,17 @@ export default {
     appBaseUrl: process.env.APP_BASE_URL,
   },
   server: {
-    port: 5000,
-    // host: '192.168.50.88',
-    host: '127.0.0.1',
+    port: 5432,
   },
   axios: {
-    proxy: true,
+    // 线上采用nginx作为代理，需要关闭
+    proxy: process.env.NODE_ENV !== 'production',
+    prefix: '/api',
+    baseUrl: process.env.APP_BASE_URL,
   },
 
   proxy: {
-    '/blog': {
-      // target: 'http://0.0.0.0:4000/api',
-      // target: 'http://192.168.50.13:4000/api',
+    '/api/blog': {
       target: process.env.APP_BASE_URL,
       changeOrigin: true,
     },

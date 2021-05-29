@@ -26,6 +26,7 @@
       <span class="app-footer-text"> 转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源。 </span>
       <a-divider style="margin: 10px 0; background: #d2d2d7" />
       <span class="app-footer-text"> {{ copyright }} </span>
+      <span v-if="record" class="app-footer-text" style="margin-top: 5px"> {{ record }} </span>
     </div>
   </div>
 </template>
@@ -55,6 +56,9 @@ export default {
     copyright() {
       const year = new Date().getFullYear()
       return `Copyright © ${year} Woods 保留所有权利.`
+    },
+    record() {
+      return process.env.RECORD
     },
   },
 }

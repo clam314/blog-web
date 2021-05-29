@@ -59,10 +59,12 @@ export default {
     },
   },
   mounted() {
-    if (!window.COMMIT) {
-      window.VERSION = process.env.VERSION
-      window.COMMIT = process.env.COMMIT
-      window.BRANCH = process.env.BRANCH
+    if (!window.APP_INFO) {
+      window.APP_INFO = {
+        APP_VERSION: process.env.APP_VERSION,
+        GIT_HASH: process.env.GIT_HASH,
+        BUILD_DATE: process.env.BUILD_DATE,
+      }
     }
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
     console.log('mounted ', name)

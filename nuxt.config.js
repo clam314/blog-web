@@ -1,6 +1,15 @@
 require('dotenv').config()
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
-const gitRevision = new GitRevisionPlugin()
+const GitRevision = new GitRevisionPlugin()
+const buildDate = JSON.stringify(new Date().toLocaleString())
+
+// check Git
+function getGitHash () {
+  try {
+    return GitRevision.version()
+  } catch (e) {}
+  return 'unknown'
+}
 
 const config = {
   ssr: true,
@@ -59,9 +68,9 @@ const config = {
   },
   env: {
     appBaseUrl: process.env.APP_BASE_URL,
-    VERSION: JSON.stringify(gitRevision.version()),
-    COMMIT: JSON.stringify(gitRevision.commithash()),
-    BRANCH: JSON.stringify(gitRevision.branch()),
+    APP_VERSION: `"${require('./package.json').version}"`,
+    GIT_HASH: JSON.stringify(getGitHash()),
+    BUILD_DATE: buildDate,
   },
   server: {
     port: 5432,

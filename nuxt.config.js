@@ -4,7 +4,7 @@ const GitRevision = new GitRevisionPlugin()
 const buildDate = JSON.stringify(new Date().toLocaleString())
 
 // check Git
-function getGitHash () {
+function getGitHash() {
   try {
     return GitRevision.version()
   } catch (e) {}
@@ -77,7 +77,7 @@ const config = {
   },
   axios: {
     // 线上采用nginx作为代理，需要关闭
-    proxy: true,
+    proxy: process.env.PROXY,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },

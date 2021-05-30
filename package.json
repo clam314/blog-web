@@ -21,7 +21,6 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/dotenv": "^1.4.1",
-    "@nuxtjs/proxy": "^2.1.0",
     "ant-design-vue": "^1.6.5",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
@@ -33,6 +32,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/proxy": "^2.1.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",

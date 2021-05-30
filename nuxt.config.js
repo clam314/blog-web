@@ -76,18 +76,18 @@ const config = {
     port: 5432,
   },
   axios: {
-    // 线上采用nginx作为代理，需要关闭
     proxy: process.env.PROXY,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },
-
-  proxy: {
-    '/api/blog': {
-      target: process.env.APP_BASE_URL,
-      changeOrigin: true,
-    },
-  },
+  // 通过注释关闭反向代理，线上采用nginx
+  //
+  // proxy: {
+  //   '/api/blog': {
+  //     target: process.env.APP_BASE_URL,
+  //     changeOrigin: true,
+  //   },
+  // },
 }
 console.log('NODE_ENV: ', process.env.NODE_ENV)
 

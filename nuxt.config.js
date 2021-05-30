@@ -76,6 +76,7 @@ const config = {
     port: 5432,
   },
   axios: {
+    proxy: true,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },

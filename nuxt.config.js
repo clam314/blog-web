@@ -74,12 +74,12 @@ const config = {
   },
   server: {
     port: 5432,
+    host: '0.0.0.0',
   },
   axios: {
-    // proxy: true,
+    proxy: true,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
-    credentials: true,
   },
 
   proxy: {

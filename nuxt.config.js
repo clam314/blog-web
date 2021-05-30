@@ -77,6 +77,7 @@ const config = {
   },
   axios: {
     proxy: true,
+    https: true,
     prefix: '/api',
     baseUrl: process.env.APP_BASE_URL,
   },

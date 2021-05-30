@@ -46,8 +46,7 @@ const config = {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  // modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/dotenv', 'cookie-universal-nuxt'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', 'cookie-universal-nuxt'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/dotenv', 'cookie-universal-nuxt'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
@@ -83,12 +82,12 @@ const config = {
     credentials: true,
   },
 
-  // proxy: {
-  //   '/api/blog': {
-  //     target: process.env.APP_BASE_URL,
-  //     changeOrigin: true,
-  //   },
-  // },
+  proxy: {
+    '/api/blog': {
+      target: process.env.APP_BASE_URL,
+      changeOrigin: true,
+    },
+  },
 }
 console.log('NODE_ENV: ', process.env.NODE_ENV)
 

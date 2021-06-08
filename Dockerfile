@@ -3,7 +3,6 @@ FROM node:15-alpine
 LABEL MAINTAINER="woods"
 
 ENV GIT_BRANCH master
-ENV GIT_FOLDER blog-web
 # 创建一个工作目录
 WORKDIR /app
 
@@ -15,23 +14,19 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
   && rm -rf /var/cache/apk/*
 
 RUN apk add --no-cache bash git \
-  && cd /app \
-  && git clone -b $GIT_BRANCH --depth=1 https://github.com/clam314/blog-web.git \
-  && cd $GIT_FOLDER
+  && git clone -b $GIT_BRANCH --depth=1 https://github.com/clam314/blog-web.git /app
 
-COPY .env /app/$GIT_FOLDER
+COPY .env /app
 
-# 设置第三方依赖包sharp的镜像地址
-RUN  yarn install --no-progress --registry=https://registry.npm.taobao.org \
-  && npm run build \
-  && cd .. \
-  && cp -rf $GIT_FOLDER/.nuxt . \
-  && cp -rf $GIT_FOLDER/static . \
-  && cp $GIT_FOLDER/.env . \
-  && cp $GIT_FOLDER/nuxt.config.js . \
-  && rm -rf /app/$GIT_FOLDER
+RUN yarn install --no-progress --registry=https://registry.npm.taobao.org \
+  && yarn run build \
+  && rm -rf api \
+  && rm -rf assets \
+  && rm -rf components \
+  && rm -rf layouts \
+  && rm -rf pages \
+  && rm -rf plugins \
+  && rm -rf store \
+  && rm -rf utils
 
-RUN  yarn install --no-progress --registry=https://registry.npm.taobao.org \
-  && npm run build
-
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]

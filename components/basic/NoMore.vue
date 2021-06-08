@@ -13,5 +13,7 @@ export default {
 .no-more {
   font-size: 14px !important;
   color: @primary-color !important;
+  display: flex !important;
+  align-items: center !important;
 }
 </style>

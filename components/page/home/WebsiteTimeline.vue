@@ -25,8 +25,12 @@ export default {
     return {
       items: [
         {
+          time: '20210530',
+          description: 'v1.0版上线,升级成https，并优化Nginx配置统一实现反向代理博客与管理后台及后端接口',
+        },
+        {
           time: '20210220',
-          description: 'v0.4beta版上线',
+          description: 'v0.4beta版上线,主要进一步完善功能和优化页面',
         },
         {
           time: '20210120',

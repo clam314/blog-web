@@ -21,7 +21,7 @@
               </div>
             </div>
             <!--            eslint-disable-next-line-->
-            <div class="markdown-body"  v-html="article.publishedContent" />
+            <div class="markdown-body" v-html="article.publishedContent" />
             <div class="card-footer">
               <a-button type="primary" shape="circle" icon="like" size="large" @click="handleLike" />
             </div>
@@ -96,11 +96,12 @@ export default {
     },
   },
   head() {
+    const keywords = this.article.tags ? this.article.tags.toString() : ''
     return {
       title: this.article.title || '前端实验室',
       meta: [
         { hid: 'description', name: 'description', content: this.article.description },
-        { hid: 'keywords', name: 'keywords', content: this.article.tags.toString() },
+        { hid: 'keywords', name: 'keywords', content: keywords },
       ],
       link: [
         {

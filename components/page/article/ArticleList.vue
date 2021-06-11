@@ -55,6 +55,7 @@ export default {
       noMore: false,
       infiniteId: +new Date(),
       showInfinite: true,
+      autoLoadDisabled: false,
     }
   },
   methods: {
@@ -93,6 +94,7 @@ export default {
           if (this.noMore) {
             $state.complete()
             if (this.articleList.list.length === 0) {
+              console.log('loaded:' + this.showInfinite)
               this.showInfinite = false
             }
           }

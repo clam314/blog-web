@@ -27,7 +27,9 @@
         :updateAt="Number(item.publishedTime)"
       />
     </a-list-item>
-    <infinite-loading v-if="showInfinite" :identifier="infiniteId" @infinite="infiniteHandler" />
+    <no-ssr>
+      <infinite-loading v-if="showInfinite" :identifier="infiniteId" :onInfinite="infiniteHandler" />
+    </no-ssr>
   </a-list>
 </template>
 
@@ -95,7 +97,7 @@ export default {
             $state.complete()
             if (this.articleList.list.length === 0) {
               console.log('loaded:' + this.showInfinite)
-              this.showInfinite = false
+              // this.showInfinite = false
             }
           }
         })

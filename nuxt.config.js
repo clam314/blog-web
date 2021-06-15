@@ -33,7 +33,7 @@ const config = {
     '@/plugins/filter/index.js',
     '@/plugins/axios',
     '@/plugins/api-center',
-    { src: '~plugins/vue-infinite-scroll.js', ssr: false },
+    '@/plugins/vue-infinite-scroll.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -50,7 +50,8 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    parallel: true,
+    parallel: false,
+    cache: false,
     loaders: {
       less: {
         lessOptions: {

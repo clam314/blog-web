@@ -50,7 +50,7 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    parallel: false,
+    parallel: true,
     cache: false,
     loaders: {
       less: {
@@ -60,12 +60,12 @@ const config = {
       },
     },
     // 修改打包成单独的CSS文件引入
-    extractCSS: {
-      // allChunks: true,
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: true,
-    },
+    // extractCSS: {
+    //   // allChunks: true,
+    //   filename: '[name].css',
+    //   chunkFilename: '[id].css',
+    //   ignoreOrder: true,
+    // },
   },
   env: {
     appBaseUrl: process.env.APP_BASE_URL,

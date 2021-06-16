@@ -1,8 +1,8 @@
+import path from 'path'
 require('dotenv').config()
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const GitRevision = new GitRevisionPlugin()
 const buildDate = JSON.stringify(new Date().toLocaleString())
-
 // check Git
 function getGitHash() {
   try {
@@ -73,6 +73,9 @@ const config = {
       ],
     },
     transpile: [/ant-design-vue/],
+    extend(config) {
+      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './plugins/antd-icon.js') // 引入需要的
+    },
     // 修改打包成单独的CSS文件引入
     // extractCSS: {
     //   // allChunks: true,

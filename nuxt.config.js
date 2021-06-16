@@ -50,7 +50,7 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    analyze: true,
+    // analyze: true,
     parallel: true,
     cache: false,
     loaders: {
@@ -74,7 +74,7 @@ const config = {
     },
     transpile: [/ant-design-vue/],
     extend(config) {
-      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './plugins/antd-icon.js') // 引入需要的
+      config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './plugins/antd-icon.js')
     },
     // 修改打包成单独的CSS文件引入
     // extractCSS: {

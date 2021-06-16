@@ -50,6 +50,7 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    analyze: true,
     parallel: true,
     cache: false,
     loaders: {
@@ -59,6 +60,19 @@ const config = {
         },
       },
     },
+    babel: {
+      plugins: [
+        [
+          'import',
+          {
+            libraryName: 'ant-design-vue',
+            libraryDirectory: 'es',
+            style: true,
+          },
+        ],
+      ],
+    },
+    transpile: [/ant-design-vue/],
     // 修改打包成单独的CSS文件引入
     // extractCSS: {
     //   // allChunks: true,

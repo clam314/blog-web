@@ -97,13 +97,12 @@ export default {
   },
   head() {
     const keywords = this.article.tags ? this.article.tags.toString() : ''
-    const tid = this.article.tid ? this.article.tid : ''
 
     return {
       title: this.article.title || '前端实验室',
       meta: [
-        { hid: `description-${tid}`, name: 'description', content: this.article.description },
-        { hid: `keywords-${tid}`, name: 'keywords', content: keywords },
+        { hid: `description`, name: 'description', content: this.article.description },
+        { hid: `keywords`, name: 'keywords', content: keywords },
       ],
       link: [
         {

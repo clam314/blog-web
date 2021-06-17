@@ -20,12 +20,12 @@ const config = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: 'description-public',
+        hid: 'description',
         name: 'description',
         content: '在这里，你可以看到我的一些技术文章和网络日志，中间可能还夹杂着自己的一些随笔杂文',
       },
       {
-        hid: 'keywords-public',
+        hid: 'keywords',
         name: 'keywords',
         content: '前端、技术、Android、Linux、Docker、Node、HTML、CSS',
       },

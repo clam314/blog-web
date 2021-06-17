@@ -25,8 +25,12 @@ export default {
     return {
       items: [
         {
+          time: '20210617',
+          description: 'v1.0.1版,Nginx优化,升级http2,对已知问题的修复',
+        },
+        {
           time: '20210530',
-          description: 'v1.0版上线,升级成https，并优化Nginx配置统一实现反向代理博客与管理后台及后端接口',
+          description: 'v1.0版上线,升级成https,并优化Nginx配置统一实现反向代理博客与管理后台及后端接口',
         },
         {
           time: '20210220',
@@ -38,11 +42,11 @@ export default {
         },
         {
           time: '20210105',
-          description: 'v0.2beta版本上线,包括基于Nuxt实现SSR的博客Web页面，以及后端相关接口',
+          description: 'v0.2beta版本上线,包括基于Nuxt实现服务器渲染博客的Web页面,以及博客相关后端接口',
         },
         {
           time: '20201201',
-          description: 'v0.1beta版本上线，包括基于koa2的后台与基于antdv pro的管理系统Web页面',
+          description: 'v0.1beta版本上线,包括基于koa2的后台与基于antdv pro的管理系统Web页面',
         },
       ],
     }

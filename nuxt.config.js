@@ -19,9 +19,19 @@ const config = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description-public',
+        name: 'description',
+        content: '在这里，你可以看到我的一些技术文章和网络日志，中间可能还夹杂着自己的一些随笔杂文',
+      },
+      {
+        hid: 'keywords-public',
+        name: 'keywords',
+        content: '前端、技术、Android、Linux、Docker、Node、HTML、CSS',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.ico' }],
+    script: [{ src: 'https://hm.baidu.com/hm.js?976bf3f1e3dd75a740aae527d2af0be6' } /* 引入百度统计的js */],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -34,6 +44,7 @@ const config = {
     '@/plugins/axios',
     '@/plugins/api-center',
     '@/plugins/vue-infinite-scroll.js',
+    '@/plugins/analysis.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

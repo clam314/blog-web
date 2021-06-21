@@ -16,7 +16,13 @@ import {
   Row,
   Col,
   Result,
+  message,
 } from 'ant-design-vue'
+Vue.prototype.$message = message
+message.config({
+  top: '100px',
+  maxCount: 1,
+})
 
 Vue.use(Descriptions)
 Vue.use(Button)

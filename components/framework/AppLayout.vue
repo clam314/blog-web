@@ -3,7 +3,7 @@
     <a-layout-header class="app-header">
       <div class="app-header-wrapper">
         <div class="logo-wrapper">
-          <div class="logo" />
+          <div class="logo" @click="openEruda" />
           <span class="logo-title">Web前端实验室</span>
         </div>
         <app-menu
@@ -42,6 +42,7 @@ import MenuIconOmit from '@/components/basic/MenuIconOmit'
 import AppFooter from '@/components/framework/AppFooter'
 import DrawerMenu from '~/components/framework/DrawerMenu'
 import AppMenu from '~/components/framework/AppMenu'
+import { initEruda } from '~/utils/eruda'
 
 export default {
   components: { AppFooter, AppMenu, DrawerMenu, MenuIconOmit },
@@ -66,6 +67,9 @@ export default {
         BUILD_DATE: process.env.BUILD_DATE,
       }
     }
+    if (!window.$eruda_click) {
+      window.$eruda_click = 0
+    }
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
     console.log('mounted ', name)
     if (name) {
@@ -85,6 +89,16 @@ export default {
     window.removeEventListener('scroll', this.hide)
   },
   methods: {
+    openEruda() {
+      window.$eruda_click = window.$eruda_click + 1
+      if (window.$eruda_click >= 5 && window.$eruda_click < 10) {
+        this.$message.info(`click:${window.$eruda_click}`)
+      }
+      if (window.$eruda_click === 10) {
+        initEruda()
+        this.$message.success(`open eruda~`)
+      }
+    },
     onMenuItemClick(item) {
       this.selectedKeys = [item.key]
       const path = this.findMenuOrRouter(item.key, 'name', 'path')

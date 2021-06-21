@@ -8,29 +8,14 @@
 
 <script>
 import AppLayout from '~/components/framework/AppLayout'
+import { initEruda } from '~/utils/eruda'
 
 export default {
   components: {
     AppLayout,
   },
   mounted() {
-    if (/eruda=true/.test(window.location) || localStorage.getItem('active-eruda') === 'true') {
-      const scriptSrc = '//cdn.bootcdn.net/ajax/libs/eruda/2.3.3/eruda.js'
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.onload = script.onreadystatechange = function () {
-        if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
-          if (window.eruda) {
-            window.eruda.init()
-            console.log('eruda init')
-          }
-          // Handle memory leak in IE
-          script.onload = script.onreadystatechange = null
-        }
-      }
-      script.src = scriptSrc
-      document.getElementById('page-layout').appendChild(script)
-    }
+    if (/eruda=true/.test(window.location)) initEruda()
   },
 }
 </script>

@@ -1,5 +1,6 @@
 import path from 'path'
 require('dotenv').config()
+const webpack = require('webpack')
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const GitRevision = new GitRevisionPlugin()
 const buildDate = JSON.stringify(new Date().toLocaleString())
@@ -61,7 +62,7 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    analyze: true,
+    // analyze: true,
     parallel: true,
     cache: false,
     optimization: {
@@ -90,6 +91,7 @@ const config = {
         },
       },
     },
+    plugins: [new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /zh-cn/)],
     loaders: {
       less: {
         lessOptions: {

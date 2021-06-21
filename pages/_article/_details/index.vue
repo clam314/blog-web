@@ -107,14 +107,14 @@ export default {
       link: [
         {
           rel: 'stylesheet',
-          href: 'https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css',
+          href: 'https://cdn.bootcdn.net/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
         },
         {
           rel: 'stylesheet',
-          href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/paraiso-dark.min.css',
+          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/paraiso-dark.min.css',
         },
       ],
-      script: [{ src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js' }],
+      script: [{ src: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/highlight.min.js' }],
     }
   },
 }

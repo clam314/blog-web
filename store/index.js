@@ -5,6 +5,7 @@ export const state = () => ({
     { name: '站点主页', type: 'smile', path: '/' },
     { name: '个人文章', type: 'read', path: '/article' },
   ],
+  selectedNavs: [],
   uuid: '',
   token: '',
   userInfo: '',
@@ -17,6 +18,7 @@ export const state = () => ({
 
 export const getters = {
   navs: (state) => state.navs,
+  selectedNavs: (state) => state.selectedNavs,
   uuid: (state) => state.uuid,
   userInfo: (state) => state.userInfo,
   avatar: (state) => state.avatar,
@@ -27,6 +29,9 @@ export const getters = {
 }
 
 export const mutations = {
+  setSelectedNavs(state, navs) {
+    state.selectedNavs = navs
+  },
   setUserInfo(state, userInfo) {
     state.userInfo = userInfo
   },

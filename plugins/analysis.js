@@ -5,6 +5,8 @@ export default ({ app: { router }, store }) => {
     try {
       window._hmt = window._hmt || []
       window._hmt.push(['_trackPageView', to.fullPath])
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   })
 }

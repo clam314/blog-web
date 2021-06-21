@@ -25,6 +25,10 @@ export default {
     return {
       items: [
         {
+          time: '20210621',
+          description: 'v1.0.2版,打包优化,已知问题修复',
+        },
+        {
           time: '20210617',
           description: 'v1.0.1版,Nginx优化,升级http2,对已知问题的修复',
         },

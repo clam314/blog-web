@@ -27,10 +27,10 @@
               <span @click="handleShowBackground">戳一戳</span>
               <a-icon type="right" />
             </a>
-            <!--            <a class="home-link">-->
-            <!--              <span @click="handleLinkClick">逛一逛</span>-->
-            <!--              <a-icon type="right" />-->
-            <!--            </a>-->
+            <a class="home-link" style="margin-left: 20px">
+              <span @click="handleLinkClick">逛一逛</span>
+              <a-icon type="right" />
+            </a>
           </div>
         </a-col>
       </a-row>
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     handleLinkClick() {
+      this.$store.commit('setSelectedNavs', ['个人文章'])
       this.$router.push({
         path: '/article',
       })

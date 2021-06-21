@@ -50,13 +50,21 @@ export default {
     return {
       drawerVisible: false,
       menusVisible: true,
-      selectedKeys: [],
+      // selectedKeys: [],
       hide: null,
     }
   },
   computed: {
     menus() {
       return this.$store.getters.navs
+    },
+    selectedKeys: {
+      get() {
+        return this.$store.getters.selectedNavs
+      },
+      set(value) {
+        this.$store.commit('setSelectedNavs', value)
+      },
     },
   },
   mounted() {

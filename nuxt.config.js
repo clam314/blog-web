@@ -44,7 +44,7 @@ const config = {
     '@/plugins/axios',
     '@/plugins/api-center',
     '@/plugins/vue-infinite-scroll.js',
-    '@/plugins/analysis.js',
+    { src: '~plugins/analysis.js', ssr: false },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

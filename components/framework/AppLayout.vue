@@ -67,11 +67,7 @@ export default {
         BUILD_DATE: process.env.BUILD_DATE,
       }
     }
-    if (!window.$eruda_click) {
-      window.$eruda_click = 0
-    }
     const name = this.findMenuOrRouter(this.$route.path, 'path', 'name')
-    console.log('mounted ', name)
     if (name) {
       this.selectedKeys = [name]
     }
@@ -90,6 +86,9 @@ export default {
   },
   methods: {
     openEruda() {
+      if (!window.$eruda_click) {
+        window.$eruda_click = 0
+      }
       window.$eruda_click = window.$eruda_click + 1
       if (window.$eruda_click >= 5 && window.$eruda_click < 10) {
         this.$message.info(`click:${window.$eruda_click}`)

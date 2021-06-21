@@ -27,9 +27,9 @@
         :updateAt="Number(item.publishedTime)"
       />
     </a-list-item>
-    <no-ssr>
-      <infinite-loading v-if="showInfinite" :identifier="infiniteId" :onInfinite="infiniteHandler" />
-    </no-ssr>
+    <client-only>
+      <infinite-loading v-if="showInfinite" :identifier="infiniteId" @infinite="infiniteHandler" />
+    </client-only>
   </a-list>
 </template>
 
@@ -70,7 +70,7 @@ export default {
       })
     },
     infiniteHandler($state) {
-      console.log('onLoadMore')
+      // console.log('onLoadMore')
       const param = {
         bid: process.env.APP_BID,
         pageNum: this.articleList.pageNum,
@@ -91,13 +91,13 @@ export default {
           } else {
             this.$message.error(data.head.respMsg)
           }
-          console.log('loaded')
+          // console.log('loaded')
           $state.loaded()
           if (this.noMore) {
             $state.complete()
             if (this.articleList.list.length === 0) {
-              console.log('loaded:' + this.showInfinite)
-              // this.showInfinite = false
+              // console.log('loaded:' + this.showInfinite)
+              this.showInfinite = false
             }
           }
         })

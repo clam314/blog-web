@@ -17,7 +17,7 @@ const config = {
   head: {
     title: '前端实验室',
     meta: [
-      { charset: 'utf-8' },
+      { 'http-equiv': 'content-type', content: 'text/html; charset=UTF-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
@@ -61,9 +61,35 @@ const config = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    // analyze: true,
+    analyze: true,
     parallel: true,
     cache: false,
+    optimization: {
+      minimize: true,
+      splitChunks: {
+        cacheGroups: {
+          atdv: {
+            test: /node_modules[\\/]ant-design-vue/,
+            chunks: 'all',
+            priority: 20,
+            name: true,
+          },
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            // cacheGroupKey here is `commons` as the key of the cacheGroup
+            name(module, chunks, cacheGroupKey) {
+              const moduleFileName = module
+                .identifier()
+                .split('/')
+                .reduceRight((item) => item)
+              const allChunksNames = chunks.map((item) => item.name).join('~')
+              return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`
+            },
+            chunks: 'all',
+          },
+        },
+      },
+    },
     loaders: {
       less: {
         lessOptions: {
@@ -86,6 +112,27 @@ const config = {
     transpile: [/ant-design-vue/],
     extend(config) {
       config.resolve.alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './plugins/antd-icon.js')
+    },
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: false,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeAttributeQuotes: false,
+        removeComments: false,
+        removeEmptyAttributes: true,
+        removeOptionalTags: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: false,
+        removeStyleLinkTypeAttributes: false,
+        removeTagWhitespace: false,
+        sortClassName: false,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+      },
     },
     // 修改打包成单独的CSS文件引入
     // extractCSS: {

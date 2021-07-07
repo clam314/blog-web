@@ -73,6 +73,10 @@ export default {
   },
   mounted() {
     this.$refs.categories.changeSelected(this.article.fid)
+    this.$nextTick(() => {
+      window.hljs.initHighlightingOnLoad()
+      window.hljs.initLineNumbersOnLoad()
+    })
   },
   methods: {
     onCategoryItemClick(item) {
@@ -107,14 +111,15 @@ export default {
       link: [
         {
           rel: 'stylesheet',
-          href: 'https://cdn.bootcdn.net/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/paraiso-dark.min.css',
+          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/github-dark.min.css',
         },
       ],
-      script: [{ src: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/highlight.min.js' }],
+      script: [
+        { src: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/highlight.min.js' },
+        {
+          src: 'https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js',
+        },
+      ],
     }
   },
 }
@@ -263,5 +268,26 @@ export default {
       display: none;
     }
   }
+}
+</style>
+
+<style>
+.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #ccc;
+  vertical-align: top;
+  padding-right: 5px !important;
+}
+
+.hljs-ln-code {
+  padding-left: 10px !important;
 }
 </style>

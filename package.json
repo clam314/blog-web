@@ -25,6 +25,7 @@
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "git-revision-webpack-plugin": "^5.0.0",
+    "highlight.js": "^11.0.1",
     "moment": "^2.29.1",
     "nuxt": "^2.14.6",
     "vue-infinite-loading": "^2.4.5"

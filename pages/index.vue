@@ -53,7 +53,7 @@ export default {
     &-content {
       min-height: calc(100vh - @app-header-height);
       content: '';
-      backdrop-filter: saturate(180%) blur(10px);
+      backdrop-filter: saturate(180%) blur(15px);
       position: absolute;
       top: 0;
       left: 0;

@@ -1,6 +1,8 @@
 import path from 'path'
 require('dotenv').config()
+// eslint-disable-next-line nuxt/no-cjs-in-config
 const webpack = require('webpack')
+// eslint-disable-next-line nuxt/no-cjs-in-config
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const GitRevision = new GitRevisionPlugin()
 const buildDate = JSON.stringify(new Date().toLocaleString())
@@ -45,6 +47,7 @@ const config = {
     '@/plugins/axios',
     '@/plugins/api-center',
     '@/plugins/vue-infinite-scroll.js',
+    { src: '@/plugins/highlight/highlight', ssr: false },
     { src: '~plugins/analysis.js', ssr: false },
   ],
 

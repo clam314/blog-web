@@ -88,7 +88,7 @@ export default {
       top: 0;
       left: 0;
       overflow: hidden;
-      backdrop-filter: saturate(90%) blur(5px);
+      backdrop-filter: saturate(90%) blur(15px);
       background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;

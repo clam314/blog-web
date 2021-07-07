@@ -43,6 +43,7 @@ import UserInfo from '@/components/page/article/UserInfo'
 import ArticleCategories from '@/components/page/article/ArticleCategories'
 import BackTop from '@/components/basic/BackTop'
 import { gerRandomImage } from '@/utils/utils'
+import { initHljs } from '@/plugins/highlight/highlight'
 
 export default {
   components: {
@@ -74,8 +75,7 @@ export default {
   mounted() {
     this.$refs.categories.changeSelected(this.article.fid)
     this.$nextTick(() => {
-      window.hljs.initHighlightingOnLoad()
-      window.hljs.initLineNumbersOnLoad()
+      initHljs()
     })
   },
   methods: {
@@ -111,13 +111,7 @@ export default {
       link: [
         {
           rel: 'stylesheet',
-          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/github-dark.min.css',
-        },
-      ],
-      script: [
-        { src: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/highlight.min.js' },
-        {
-          src: 'https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js',
+          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/paraiso-dark.min.css',
         },
       ],
     }
@@ -269,10 +263,8 @@ export default {
     }
   }
 }
-</style>
 
-<style>
-.hljs-ln-numbers {
+/deep/ .hljs-ln-numbers {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -287,7 +279,11 @@ export default {
   padding-right: 5px !important;
 }
 
-.hljs-ln-code {
+/deep/ .hljs-ln-code {
   padding-left: 10px !important;
+}
+
+/deep/ .markdown-body img {
+  max-width: 100%;
 }
 </style>

@@ -1,3 +1,32 @@
+:root {
+  --content-bg-color: #f5f5f7;
+  --footer-bg-color: #fbfbfd;
+  --footer-divider: #d2d2d7;
+  --footer-title: rgba(0, 0, 0, 0.85);
+  --footer-descriptions: rgba(0, 0, 0, 0.65);
+
+  --timeline-bg-color: white;
+  --timeline-title-color: #333333;
+  --timeline-descriptions-color: #86868b;
+
+  --card-bg-color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --content-bg-color: #202225;
+    --footer-bg-color: #2b2b2b;
+    --footer-divider: rgba(255, 255, 255, 0.65);
+    --footer-title: rgba(255, 255, 255, 0.85);
+    --footer-descriptions: rgba(255, 255, 255, 0.65);
+
+    --timeline-bg-color: #3f3f40;
+    --timeline-title-color: white;
+    --timeline-descriptions-color: rgba(255, 255, 255, 0.65);
+    --card-bg-color: #313335;
+  }
+}
+
 // 内容的最大宽度
 @app-max-width: 1220px;
 
@@ -5,7 +34,7 @@
 @app-max-width-margin: 10px;
 
 // 真实的内容最大宽度
-@app-max-content-width: @app-max-width - 2*@app-max-width-margin;
+@app-max-content-width: @app-max-width - 2 * @app-max-width-margin;
 
 // 导航栏高度
 @app-header-height: 44px;
@@ -13,8 +42,17 @@
 @nav-background-color: rgba(0, 0, 0, 0.8);
 @nav-text-color: white;
 
-@app-content-background-color: #f5f5f7;
-@app-footer-background-color: #FBFBFD;
+@app-content-background-color: var(--content-bg-color);
+@app-footer-background-color: var(--footer-bg-color);
+@app-footer-divider-color: var(--footer-divider);
+@app-footer-title: var(--footer-title);
+@app-footer-descriptions: var(--footer-descriptions);
+
+@timeline-bg-color: var(--timeline-bg-color);
+@timeline-title-color: var(--timeline-title-color);
+@timeline-descriptions-color: var(--timeline-descriptions-color);
+
+@card-bg-color: var(--card-bg-color);
 
 @article-title-color: #0071e3;
 @article-category-color: #1d1d1f;

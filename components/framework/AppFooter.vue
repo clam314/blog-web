@@ -24,7 +24,7 @@
     </a-descriptions>
     <div style="padding: 34px 0">
       <span class="app-footer-text"> 转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源。 </span>
-      <a-divider style="margin: 10px 0; background: #d2d2d7" />
+      <a-divider class="footer-divider" />
       <span class="app-footer-text"> {{ copyright }} </span>
       <span v-if="record" class="app-footer-text" style="margin-top: 5px"> {{ record }} </span>
     </div>
@@ -69,10 +69,11 @@ export default {
 .app-footer-wrapper {
   margin: 0 auto;
   max-width: @app-max-content-width;
+  color: @app-footer-descriptions;
 
   @footer-table-font-size: 12px;
   a {
-    color: inherit;
+    color: @app-footer-descriptions;
     font-size: @footer-table-font-size;
     margin-bottom: 7px;
   }
@@ -86,14 +87,24 @@ export default {
     font-size: @footer-table-font-size;
   }
 
+  /deep/ .ant-descriptions-item-content {
+    color: @app-footer-descriptions;
+  }
+
   /deep/ .ant-descriptions-item-label {
     font-weight: 600;
     font-size: @footer-table-font-size;
+    color: @app-footer-descriptions;
   }
 }
 
 .app-footer-text {
   font-size: 12px;
   display: block;
+}
+
+.footer-divider {
+  background-color: @app-footer-divider-color;
+  margin: 10px 0;
 }
 </style>

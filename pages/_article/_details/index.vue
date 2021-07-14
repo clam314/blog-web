@@ -296,17 +296,25 @@ export default {
   }
 
   ul {
-    list-style-type: disc;
+    list-style-type: square;
+    padding-left: 2em;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 2em;
   }
 
   img {
     max-width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     display: table;
     margin: 0 auto;
   }
 
   pre {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
     border-radius: 3px;
   }
 

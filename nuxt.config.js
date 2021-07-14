@@ -38,7 +38,7 @@ const config = {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['~assets/style/reset', '~assets/style/variables'],
+  css: ['~assets/style/reset', '~assets/style/variables', '~assets/style/config'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [

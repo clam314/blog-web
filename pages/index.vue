@@ -67,7 +67,7 @@ export default {
   }
   &-introduction {
     width: 100%;
-    background-color: @app-footer-background-color;
+    background-color: @app-content-background-color;
     padding: 30px 10px;
 
     @media only screen and (max-width: @screen-xl) {
@@ -84,10 +84,12 @@ export default {
   &-timeline {
     width: 100%;
     min-height: calc(60vh - @app-header-height);
-    background-color: @app-footer-background-color;
+    background-color: @app-content-background-color;
     padding: 0 10px;
+    margin-bottom: 10px;
     @media only screen and (max-width: @screen-xs-max) {
       padding: 0;
+      margin-bottom: 0;
     }
   }
 }

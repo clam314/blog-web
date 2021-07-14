@@ -70,16 +70,13 @@ export default {
   align-items: center;
   padding: 20px 20px 0;
   margin: 0 auto;
-  background-color: #f2f2f2;
+  background-color: @timeline-bg-color;
 }
-
-@title-color: #333333;
-@descriptions-color: #86868b;
 
 .timeline-title {
   font-weight: 600;
   font-size: 32px;
-  color: @title-color;
+  color: @timeline-title-color;
   margin-bottom: 20px;
   z-index: 5;
 }
@@ -97,19 +94,19 @@ export default {
   }
   &-top-icon {
     font-size: 32px;
-    color: @title-color;
+    color: @timeline-title-color;
   }
 
   &-time {
     font-size: 32px;
     font-weight: 600;
-    color: @title-color;
+    color: @timeline-title-color;
     display: block;
   }
   &-description {
     font-size: 17px;
     font-weight: 400;
-    color: @descriptions-color;
+    color: @timeline-descriptions-color;
     display: block;
   }
 }

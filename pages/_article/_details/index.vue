@@ -283,7 +283,39 @@ export default {
   padding-left: 10px !important;
 }
 
-/deep/ .markdown-body img {
-  max-width: 100%;
+/deep/ .markdown-body {
+  h1 {
+    margin-top: 20px;
+    border-left: #0066ee solid 3px;
+    padding-left: 10px;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 5px;
+    display: table;
+    margin: 0 auto;
+  }
+
+  pre {
+    border-radius: 3px;
+  }
+
+  p > code {
+    padding: 0.2em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+  }
 }
 </style>

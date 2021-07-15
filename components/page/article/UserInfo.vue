@@ -36,9 +36,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/global';
 .card-background {
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: white;
+  background-color: @card-bg-color;
 
   .user-info {
     text-align: center;
@@ -57,11 +58,15 @@ export default {
     }
 
     & > .username {
-      color: rgba(0, 0, 0, 0.85);
+      color: @card-title;
       font-size: 20px;
       line-height: 28px;
       font-weight: 500;
       margin-bottom: 4px;
+    }
+
+    & > .bio {
+      color: @card-descriptions;
     }
   }
 
@@ -72,7 +77,7 @@ export default {
 
     & > .tags-title {
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.85);
+      color: @card-title;
       margin-bottom: 12px;
     }
   }

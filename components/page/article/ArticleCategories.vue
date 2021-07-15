@@ -1,5 +1,5 @@
 <template>
-  <a-card class="card-wrapper" :bordered="false">
+  <a-card class="card-wrapper card-background" :bordered="false">
     <div class="article-category">
       <a-divider class="category-title">{{ title }}</a-divider>
       <a-menu v-model="selected" class="categories" theme="light" mode="inline" @click="onMenuClick">
@@ -46,9 +46,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~assets/style/config.less';
 .card-wrapper {
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: white;
+  background-color: @card-bg-color;
 
   /deep/ .ant-card-body {
     padding-left: 0;
@@ -58,11 +59,23 @@ export default {
   .article-category {
     .categories {
       border: unset;
+      background: transparent;
     }
 
     .category-title {
       padding-right: 24px;
       padding-left: 24px;
+      color: @card-title;
+    }
+  }
+
+  /deep/ .ant-menu {
+    color: @card-descriptions;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /deep/ .ant-menu-item-selected {
+      background-color: #141414;
     }
   }
 }

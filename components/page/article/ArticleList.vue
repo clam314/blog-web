@@ -123,6 +123,7 @@ export default {
 <style lang="less" scoped>
 @import '~assets/style/variables.less';
 @import '~assets/style/config.less';
+@import '~assets/style/global.less';
 
 // 修复 antv list组件 actions插槽莫名其妙多了空li元素的问题
 /deep/ .ant-list-item-action > li:nth-child(even) {
@@ -143,5 +144,9 @@ export default {
     width: 100%;
     height: 180px;
   }
+}
+
+/deep/ .icon-info {
+  color: @card-descriptions;
 }
 </style>

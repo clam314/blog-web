@@ -52,10 +52,11 @@ export default {
   .description {
     max-width: 720px;
     line-height: 22px;
+    color: @card-descriptions;
   }
   .extra {
     margin-top: 16px;
-    color: @text-color-secondary;
+    color: @card-descriptions;
     line-height: 22px;
 
     & .avatar {
@@ -71,12 +72,12 @@ export default {
 
     & .owner,
     & .category {
-      color: @article-category-color;
+      color: @card-title;
     }
 
     & > em {
       margin-left: 16px;
-      color: @disabled-color;
+      color: @card-descriptions-2;
       font-style: normal;
     }
   }

@@ -119,6 +119,10 @@ export default {
     }
   }
 
+  .card-background {
+    background: @card-bg-color;
+  }
+
   .card-category {
     margin-top: 18px;
   }

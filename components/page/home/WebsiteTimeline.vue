@@ -25,6 +25,10 @@ export default {
     return {
       items: [
         {
+          time: '20210715',
+          description: 'v1.1版,引入深夜模式,已知问题修复',
+        },
+        {
           time: '20210621',
           description: 'v1.0.2版,打包优化,已知问题修复',
         },

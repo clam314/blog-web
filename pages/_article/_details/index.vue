@@ -111,7 +111,7 @@ export default {
       link: [
         {
           rel: 'stylesheet',
-          href: 'https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/styles/paraiso-dark.min.css',
+          href: `/paraiso-dark.min.css`,
         },
       ],
     }
@@ -144,7 +144,6 @@ export default {
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
-      //background-attachment: fixed;
       margin-bottom: 20px;
       @media only screen and (max-width: @screen-sm) {
         height: 180px;

@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const GitRevision = new GitRevisionPlugin()
 const buildDate = JSON.stringify(new Date().toLocaleString())
+const timestamp = Math.round(new Date().getTime() / 1000)
 // check Git
 function getGitHash() {
   try {
@@ -139,7 +140,15 @@ const config = {
         useShortDoctype: true,
       },
     },
-    // 修改打包成单独的CSS文件引入
+    filenames: {
+      app: ({ isDev }) => (isDev ? '[name].js' : `[contenthash:5].${timestamp}.js`),
+      chunk: ({ isDev }) => (isDev ? '[name].js' : `[contenthash:5].${timestamp}.js`),
+      css: ({ isDev }) => (isDev ? '[name].css' : `[contenthash:5].${timestamp}.css`),
+      img: ({ isDev }) => (isDev ? '[path][name].[ext]' : `img/[contenthash:5].${timestamp}.[ext]`),
+      font: ({ isDev }) => (isDev ? '[path][name].[ext]' : 'fonts/[contenthash:5].[ext]'),
+      video: ({ isDev }) => (isDev ? '[path][name].[ext]' : 'videos/[contenthash:5].[ext]'),
+    },
+    // // 修改打包成单独的CSS文件引入
     // extractCSS: {
     //   // allChunks: true,
     //   filename: '[name].css',

@@ -213,6 +213,11 @@ export default {
     padding: 0;
   }
 
+  .card-background {
+    background: @card-bg-color;
+    color: @card-descriptions;
+  }
+
   .card-footer {
     width: 100%;
     min-height: 100px;
@@ -284,6 +289,15 @@ export default {
 }
 
 /deep/ .markdown-body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @card-title;
+  }
+
   h1 {
     margin-top: 20px;
     border-left: #0066ee solid 3px;

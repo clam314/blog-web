@@ -26,7 +26,9 @@
       <span class="app-footer-text"> 转载内容版权归作者及来源网站所有，本站原创内容转载请注明来源。 </span>
       <a-divider class="footer-divider" />
       <span class="app-footer-text"> {{ copyright }} </span>
-      <span v-if="record" class="app-footer-text" style="margin-top: 5px"> {{ record }} </span>
+      <a v-if="record" href="https://beian.miit.gov.cn/" class="app-footer-text" style="margin-top: 5px">
+        {{ record }}
+      </a>
     </div>
   </div>
 </template>

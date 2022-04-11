@@ -35,7 +35,14 @@ const config = {
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.ico' }],
-    script: [{ src: 'https://hm.baidu.com/hm.js?976bf3f1e3dd75a740aae527d2af0be6' } /* 引入百度统计的js */],
+    script: [
+      { src: 'https://hm.baidu.com/hm.js?976bf3f1e3dd75a740aae527d2af0be6' },
+      {
+        async: true,
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5270681078525478',
+        crossorigin: 'anonymous',
+      },
+    ],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
